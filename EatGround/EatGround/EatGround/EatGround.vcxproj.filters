@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="01.Manager">
+      <UniqueIdentifier>{cf83fa7f-1d3a-4577-a69c-7e4d20acd91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\TimeMgr">
+      <UniqueIdentifier>{5c8b4daf-6c7a-4a44-ac95-502c9e0b9bc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\SceneMgr">
+      <UniqueIdentifier>{05b96ca1-1a86-481a-90a6-66490c21840f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\CKeyMgr">
+      <UniqueIdentifier>{8615fe7f-9dbe-4ff3-969a-3243c30258bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\GameMgr">
+      <UniqueIdentifier>{a3f876a1-8817-4ec3-9975-8e304111854c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\BitMgr">
+      <UniqueIdentifier>{52170e95-91ee-4590-92e0-5646cd4f7076}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object">
+      <UniqueIdentifier>{6b9880bd-a0c4-4aa1-b922-4d7c0d9a9dfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object\CEnemy">
+      <UniqueIdentifier>{263f070a-11fd-4415-b5f4-3e1eda4da7bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Object\CPlayer">
+      <UniqueIdentifier>{a21d591c-7435-4882-a573-3ab2509792f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component">
+      <UniqueIdentifier>{bc8b731e-6ba6-4e93-a826-74d2c552525d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\Transform2D">
+      <UniqueIdentifier>{09eac528-031e-4374-891b-5aa0d20202f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\Bitmap">
+      <UniqueIdentifier>{164f0841-e4cb-425e-be24-130b8c126b71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Manager\CObjectMgr">
+      <UniqueIdentifier>{65ea2072-080c-4c3e-8778-fe6f45995a69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene">
+      <UniqueIdentifier>{df227d07-d592-4044-9932-ddc3604953e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\Scene_Start">
+      <UniqueIdentifier>{aa1a44dd-f61f-4cc0-97d3-c15fc952945b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\Scene_Stage1">
+      <UniqueIdentifier>{10b5002a-3d7c-461c-a5da-8477b8c5a06a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\Scene_Stage2">
+      <UniqueIdentifier>{51ee3719-001a-4839-93af-9d5336268548}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.Scene\Scene_End">
+      <UniqueIdentifier>{9d73036f-dbc4-4bfa-afeb-cd3c7d14a75f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{06dc471f-0c06-4517-8a47-73cd80a17888}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="define.h" />
+    <ClInclude Include="CTimeMgr.h">
+      <Filter>01.Manager\TimeMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CSceneMgr.h">
+      <Filter>01.Manager\SceneMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CKeyMgr.h">
+      <Filter>01.Manager\CKeyMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameMgr.h">
+      <Filter>01.Manager\GameMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CTransform2D.h">
+      <Filter>04.Component\Transform2D</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h" />
+    <ClInclude Include="CComponent.h">
+      <Filter>04.Component</Filter>
+    </ClInclude>
+    <ClInclude Include="CBitmap.h">
+      <Filter>04.Component\Bitmap</Filter>
+    </ClInclude>
+    <ClInclude Include="CBitmapMgr.h">
+      <Filter>01.Manager\BitMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CObject.h">
+      <Filter>03.Object</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>03.Object\CPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemy.h">
+      <Filter>03.Object\CEnemy</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene.h">
+      <Filter>02.Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_start.h">
+      <Filter>02.Scene\Scene_Start</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_stage1.h">
+      <Filter>02.Scene\Scene_Stage1</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_stage2.h">
+      <Filter>02.Scene\Scene_Stage2</Filter>
+    </ClInclude>
+    <ClInclude Include="CScene_end.h">
+      <Filter>02.Scene\Scene_End</Filter>
+    </ClInclude>
+    <ClInclude Include="CObjectMgr.h">
+      <Filter>01.Manager\CObjectMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="CObserver.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="CSubject.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EatGround.cpp" />
+    <ClCompile Include="CTimeMgr.cpp">
+      <Filter>01.Manager\TimeMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CSceneMgr.cpp">
+      <Filter>01.Manager\SceneMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CKeyMgr.cpp">
+      <Filter>01.Manager\CKeyMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameMgr.cpp">
+      <Filter>01.Manager\GameMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CTransform2D.cpp">
+      <Filter>04.Component\Transform2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CComponent.cpp">
+      <Filter>04.Component</Filter>
+    </ClCompile>
+    <ClCompile Include="CBitmap.cpp">
+      <Filter>04.Component\Bitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="CBitmapMgr.cpp">
+      <Filter>01.Manager\BitMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CObject.cpp">
+      <Filter>03.Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>03.Object\CPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemy.cpp">
+      <Filter>03.Object\CEnemy</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene.cpp">
+      <Filter>02.Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_start.cpp">
+      <Filter>02.Scene\Scene_Start</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_stage1.cpp">
+      <Filter>02.Scene\Scene_Stage1</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_stage2.cpp">
+      <Filter>02.Scene\Scene_Stage2</Filter>
+    </ClCompile>
+    <ClCompile Include="CScene_end.cpp">
+      <Filter>02.Scene\Scene_End</Filter>
+    </ClCompile>
+    <ClCompile Include="CObjectMgr.cpp">
+      <Filter>01.Manager\CObjectMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="CObserver.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="CSubject.cpp">
+      <Filter>Observer</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EatGround.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="EatGround.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
