@@ -147,6 +147,7 @@
     <ClInclude Include="CEnemy.h" />
     <ClInclude Include="CGameMgr.h" />
     <ClInclude Include="CKeyMgr.h" />
+    <ClInclude Include="CMenuIcon.h" />
     <ClInclude Include="CObject.h" />
     <ClInclude Include="CObjectMgr.h" />
     <ClInclude Include="CObserver.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="CEnemy.cpp" />
     <ClCompile Include="CGameMgr.cpp" />
     <ClCompile Include="CKeyMgr.cpp" />
+    <ClCompile Include="CMenuIcon.cpp" />
     <ClCompile Include="CObject.cpp" />
     <ClCompile Include="CObjectMgr.cpp" />
     <ClCompile Include="CObserver.cpp" />

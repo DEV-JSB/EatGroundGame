@@ -5,11 +5,10 @@
 class CScene
 {
 public:
-	void Update();
-	void Render();
-	void Enter();
-private:
-	std::vector<wchar_t*> m_vecFilename;
-	std::vector<CBitmap*> m_vecBitmap;
+	virtual void Update();
+	virtual void Render();
+	virtual void Init();
+protected:
+	std::vector<std::wstring> m_vecFilename;
 };
 

@@ -1,10 +1,11 @@
 #pragma once
 #include"CScene.h"
-#include"CObserver.h"
 
-class CScene_stage2 : public CScene , public CObserver
+class CScene_stage2 : public CScene
 {
 public:
-	virtual void OnNotify(const int Area, EVENT _eventype) = 0;
+	virtual void Update()	override;
+	virtual void Render()	override;
+	virtual void Init()		override;
 };
 

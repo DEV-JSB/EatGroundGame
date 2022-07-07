@@ -1,5 +1,12 @@
 #pragma once
 
+
+typedef struct MySize
+{
+	int Width;
+	int Height;
+}Size;
+
 typedef struct MyVector2
 {
 	float x;
