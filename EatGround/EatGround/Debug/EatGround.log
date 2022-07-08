@@ -1,35 +1,4 @@
 ﻿  CBitmap.cpp
-  CBitmapMgr.cpp
-  CComponent.cpp
-  CEnemy.cpp
-  CGameMgr.cpp
   CMenuIcon.cpp
-  CObject.cpp
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CObject.cpp(8,34): warning C4244: 'argument': conversion from 'const int' to 'const float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CObject.cpp(8,31): warning C4244: 'argument': conversion from 'const int' to 'const float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CObject.cpp(8,28): warning C4244: 'argument': conversion from 'const int' to 'const float', possible loss of data
-  CObjectMgr.cpp
-  CPlayer.cpp
-  CScene.cpp
-  CSceneMgr.cpp
-  CScene_end.cpp
-  CScene_stage1.cpp
   CScene_start.cpp
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(22,2): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(23,2): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(24,2): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(25,2): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(26,40): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(34,2): error C2065: 'pMenuIcon1': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(34,26): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(35,2): error C2065: 'pMenuIcon2': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(35,26): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(36,2): error C2065: 'pMenuIcon3': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(36,26): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(37,2): error C2065: 'pMenuIcon4': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(37,26): error C2065: 'm_vecFilename': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(39,2): error C2065: 'pMenuIcon1': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(40,2): error C2065: 'pMenuIcon1': undeclared identifier
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CScene_start.cpp(40,26): error C2065: 'm_vecFilename': undeclared identifier
-  CTransform2D.cpp
-  EatGround.cpp
+  EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe

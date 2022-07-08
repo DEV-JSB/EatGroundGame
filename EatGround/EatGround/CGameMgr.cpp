@@ -1,7 +1,16 @@
 #include "pch.h"
 #include "CGameMgr.h"
 #include "CSceneMgr.h"
-#include"CTimeMgr.h"
+#include "CTimeMgr.h"
+#include "CObjectMgr.h"
+#include"CBitmapMgr.h"
+
+CGameMgr::CGameMgr()
+{
+
+}
+CGameMgr::~CGameMgr()
+{}
 
 void CGameMgr::Init(HWND _hdc,POINT _resolution)
 {
@@ -21,7 +30,15 @@ void CGameMgr::Init(HWND _hdc,POINT _resolution)
 	HBITMAP hOldBit = (HBITMAP)SelectObject(m_memDC, m_hBit);
 	DeleteObject(hOldBit);
 
-
-	CSceneMgr::GetInstance()->Init();
+	CBitmapMgr::GetInstance()->Init();
 	CTimeMgr::GetInstance()->Init();
+	CObjectMgr::GetInstance()->Init();
+	CSceneMgr::GetInstance()->Init();
+}
+
+void CGameMgr::Render()
+{
+	
+	CSceneMgr::GetInstance()->Render(m_memDC);
+
 }

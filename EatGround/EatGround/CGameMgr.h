@@ -8,7 +8,7 @@ public:
 	void Update();
 	void Init(HWND _hdc, POINT _resolution);
 	void Render();
-	HWND GetMainHandle() { return m_hWnd; }
+	HDC GetMainDC() { return m_hDC; }
 private:
 	HWND m_hWnd;
 	POINT m_ptResolution;

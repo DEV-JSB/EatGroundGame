@@ -11,7 +11,5 @@ public:
 	virtual void Update()			= 0;
 	virtual void Render(HDC _hdc)	= 0;
 	virtual void Init()				= 0;
-protected:
-	//std::vector<std::wstring> m_vecFilename;
 };
 

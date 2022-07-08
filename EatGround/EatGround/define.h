@@ -1,7 +1,8 @@
 #pragma once
 
 
-	
+#define WINX 800
+#define WINY 900
 #define PIE 3.141592
 #define DEGREE_TO_RADIN(angle) angle * (float)(PIE/180.0)
 #define RADIAN_TO_DEGREE(rad) rad * (float)(180.0 / PIE)

@@ -7,7 +7,7 @@ class CBitmapMgr
 
 public:
 	void Init();
-	void BitmapLoad(const std::vector<std::wstring> _filelist);
+	void BitmapLoad(const std::wstring _filename);
 	CBitmap* FindBit(std::wstring _filename) const;
 private:
 	// 파일의 경로를 저장하고 있는 wchar_t

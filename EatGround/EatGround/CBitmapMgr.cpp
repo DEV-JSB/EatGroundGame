@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "CBitmapMgr.h"
-
+#include "CGameMgr.h"
 
 CBitmapMgr::CBitmapMgr()
 	:m_szContentPath{}
@@ -15,20 +15,19 @@ void CBitmapMgr::Init()
 	wcscat_s(m_szContentPath, L"\\Bitmap\\");
 }
 
-void CBitmapMgr::BitmapLoad(const std::vector<std::wstring> _filelist)
+void CBitmapMgr::BitmapLoad(const std::wstring _filename)
 {
-	for (int i = 0; i < (int)_filelist.size(); ++i)
+	CBitmap* newBitmap;
+	newBitmap = FindBit(_filename);
+	if (nullptr == newBitmap)
 	{
-		CBitmap* newBitmap;
-		newBitmap = FindBit(_filelist[i]);
-		if (nullptr == newBitmap)
-		{
-			std::wstring filepath;
-			filepath += m_szContentPath;
-			filepath += _filelist[i];
-			newBitmap->SetBitmap(((HBITMAP)LoadImage(nullptr, filepath.c_str(), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE)));
-			m_mapBitmap.insert({ _filelist[i],newBitmap });
-		}
+		newBitmap = CBitmap::Create();
+		std::wstring filepath;
+		filepath += m_szContentPath;
+		filepath += _filename;
+		newBitmap->BitmapSetting(((HBITMAP)LoadImage(nullptr, filepath.c_str(), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE)));
+
+		m_mapBitmap.insert({ _filename,newBitmap });
 	}
 }
 

@@ -4,12 +4,16 @@
 class CTransform2D :public CComponent
 {
 public:
-	CTransform2D(Vector3 _position,Vector3 _rotation);
-	CTransform2D(float _posx, float _posy, float _posz, float _rotx, float _roty, float _rotz);
+	CTransform2D(const Vector3 _position,const Vector3 _rotation);
+	CTransform2D(const float _posx, const float _posy, const float _posz, const float _rotx, const float _roty, const float _rotz);
+	CTransform2D(const float _posx, const float _posy, const float _posz, const float _rotx, const float _roty, const float _rotz , const float _width , const float _height);
+	CTransform2D(const Vector3 _position, const Vector3 _rotation, const Vector2 _scale);
+
 	CTransform2D();
-	~CTransform2D();
+	virtual ~CTransform2D();
 public:
 	virtual void Update() override;
+	virtual void Render(HDC _hdc) override;
 public:// 임시로 만든거 나중에 고민 해보자
 	Vector3 GetPosition() { return m_vecPosition; }
 	float GetPosition_X() { return m_vecPosition.x; }
@@ -19,5 +23,6 @@ public:// 임시로 만든거 나중에 고민 해보자
 private:
 	Vector3 m_vecPosition;
 	Vector3 m_vecRotation;
+	Vector2 m_vecScale;
 };
 

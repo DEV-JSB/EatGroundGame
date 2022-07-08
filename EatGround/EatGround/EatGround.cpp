@@ -2,8 +2,7 @@
 //
 
 #include "pch.h"
-#include"CBitmapMgr.h"
-
+#include"CGameMgr.h"
 
 #define MAX_LOADSTRING 100
 
@@ -11,6 +10,8 @@
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+
+HWND g_hWnd;
 // 콘솔 출력
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
@@ -52,18 +53,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 // TEST
     {
+        CGameMgr::GetInstance()->Init(g_hWnd, POINT({WINX,WINY}));
     }
 // /// // // // / // / // /// 
     // Main message loop:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (WM_QUIT == msg.message)
+                break;
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
+        }
+        else
+        {
+            CGameMgr::GetInstance()->Render();
         }
     }
-
     return (int) msg.wParam;
 }
 
@@ -111,7 +121,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
-
+   g_hWnd = hWnd;
    if (!hWnd)
    {
       return FALSE;

@@ -5,6 +5,15 @@
 #include"CScene_end.h"
 #include "CSceneMgr.h"
 
+
+CSceneMgr::CSceneMgr()
+{
+
+}
+CSceneMgr::~CSceneMgr()
+{
+
+}
 void CSceneMgr::Init()
 {
 	m_vecScene.push_back(CScene_start::Create());

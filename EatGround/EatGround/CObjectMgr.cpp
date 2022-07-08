@@ -10,11 +10,21 @@ CObjectMgr::~CObjectMgr()
 
 }
 
-void CObjectMgr::Init()
+void CObjectMgr::Render(HDC _hdc)
 {
-	std::list<CObject*> temp;
 	for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
 	{
+		auto lst = m_mapObject[(OBJECT)i].begin();
+		while (lst != m_mapObject[(OBJECT)i].end())
+			(*lst)->Render(_hdc);
+	}
+}
+
+void CObjectMgr::Init()
+{
+	for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+	{
+		std::list<CObject*> temp;
 		m_mapObject.insert({ (OBJECT)i,temp });
 	}
 }

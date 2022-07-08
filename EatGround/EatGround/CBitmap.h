@@ -2,21 +2,29 @@
 #include"CComponent.h"
 class CBitmap : public CComponent 
 {
-
+private:
+	CBitmap();
+	virtual ~CBitmap();
 public:
-	void Render();
-	void SetBitmap(HBITMAP _bitmap);
-	void SetBitInfo(BITMAP _bitinfo);
+	static CBitmap* Create();
+
+	virtual void Update() override;
+	virtual void Render(HDC _hdc) override;
+
+	void RePositionBitmap(const int _x, const int _y);
+	void ResizeBitmap(const int _width, const int _height);
+	void BitmapSetting(const HBITMAP _hbit);
 private:
 	
 	// 중점으로 부터 출력할 사이즈
 	Size m_stSize;
 
+
+	// 비트맵을 그릴 도구
+	HDC m_hDC;
+
 	// 비트맵의 출력을 시작할 포지션
 	Vector2 m_vecPos;
-
-	// 비트맵이 그릴 화면
-	HDC		m_hdc;
 
 	// 파일로 불러들인 비트맵
 	HBITMAP	m_hBit;
