@@ -2,13 +2,16 @@
 #include"CBitmap.h"
 
 
-class CScene
+class CScene abstract
 {
-public:
-	virtual void Update();
-	virtual void Render();
-	virtual void Init();
 protected:
-	std::vector<std::wstring> m_vecFilename;
+	CScene();
+	virtual ~CScene();
+public:
+	virtual void Update()			= 0;
+	virtual void Render(HDC _hdc)	= 0;
+	virtual void Init()				= 0;
+protected:
+	//std::vector<std::wstring> m_vecFilename;
 };
 

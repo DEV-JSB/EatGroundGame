@@ -18,7 +18,7 @@ void CObjectMgr::Init()
 		m_mapObject.insert({ (OBJECT)i,temp });
 	}
 }
-void CObjectMgr::RegisterObject(OBJECT _type, CObject* _obj)
+void CObjectMgr::AddObject(OBJECT _type, CObject* _obj)
 {
 	auto lstiter = m_mapObject.find(_type);
 	(*lstiter).second.push_back(_obj);

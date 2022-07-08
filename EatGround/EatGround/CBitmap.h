@@ -4,6 +4,7 @@ class CBitmap : public CComponent
 {
 
 public:
+	void Render();
 	void SetBitmap(HBITMAP _bitmap);
 	void SetBitInfo(BITMAP _bitinfo);
 private:

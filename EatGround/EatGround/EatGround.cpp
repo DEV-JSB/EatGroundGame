@@ -52,11 +52,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 // TEST
     {
-        CBitmapMgr::GetInstance()->Init();
-        std::vector<std::wstring>testvec;
-        std::wstring file = L"ironman.bmp";
-        testvec.push_back(file);
-        CBitmapMgr::GetInstance()->BitmapLoad(testvec);
     }
 // /// // // // / // / // /// 
     // Main message loop:

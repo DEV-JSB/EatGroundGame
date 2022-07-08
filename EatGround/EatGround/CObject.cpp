@@ -2,6 +2,12 @@
 #include "CObject.h"
 #include "CBitmapMgr.h"
 
+
+CObject::CObject(const int _x, const int _y, const int _z)
+{
+	m_pTransform->SetPosition(_x,_y,_z);
+}
+
 CObject::CObject()
 {
 	// 기본 트랜스폼 생성 , 0,0,0
