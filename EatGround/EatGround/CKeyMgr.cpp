@@ -16,7 +16,7 @@ void CKeyMgr::Init()
 {
 	for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
 	{
-		m_vecKey.push_back(false);
+		m_vecbKey.push_back(false);
 	}
 }
 
@@ -28,18 +28,24 @@ void CKeyMgr::Update()
 	{
 		for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
 		{
-			if (GetAsyncKeyState(g_arrVK[i] & 0x8000))
-				m_vecKey[i] = true;
+			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
+			{
+				printf("키눌림\n");
+				m_vecbKey[i] = true;
+			}
 			else
-				m_vecKey[i] = false;
+				m_vecbKey[i] = false;
 		}
 	}
 	else
 	{
 		for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
 		{
-			if (GetAsyncKeyState(g_arrVK[i] & 0x8000))
-				m_vecKey[i] = false;
+			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
+			{
+				printf("키눌림\n");
+				m_vecbKey[i] = false;
+			}
 		}
 	}
 		

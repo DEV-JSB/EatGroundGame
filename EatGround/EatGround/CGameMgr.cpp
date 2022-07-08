@@ -6,9 +6,7 @@
 #include"CBitmapMgr.h"
 
 CGameMgr::CGameMgr()
-{
-
-}
+{}
 CGameMgr::~CGameMgr()
 {}
 
@@ -22,7 +20,6 @@ void CGameMgr::Init(HWND _hdc,POINT _resolution)
 	
 	AdjustWindowRect(&rt, WS_OVERLAPPEDWINDOW, false);
 	SetWindowPos(m_hWnd, nullptr, 200, 200, rt.right - rt.left, rt.bottom - rt.top, 0);
-
 
 	m_hBit = CreateCompatibleBitmap(m_hDC, m_ptResolution.x, m_ptResolution.y);
 	m_memDC = CreateCompatibleDC(m_hDC);
@@ -38,7 +35,10 @@ void CGameMgr::Init(HWND _hdc,POINT _resolution)
 
 void CGameMgr::Render()
 {
-	
+	Rectangle(m_memDC, -1, -1, m_ptResolution.x + 1, m_ptResolution.y + 1);
+
 	CSceneMgr::GetInstance()->Render(m_memDC);
 
+	BitBlt(m_hDC, 0, 0, m_ptResolution.x, m_ptResolution.y,
+		m_memDC, 0, 0, SRCCOPY);
 }

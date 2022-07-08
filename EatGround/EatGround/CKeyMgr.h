@@ -21,9 +21,9 @@ class CKeyMgr
 public:
 	void Init();
 	void Update();
-	bool GetKeyState(KEY _eKey) { return m_vecKey[(int)_eKey]; }
+	bool GetKeyState(KEY _eKey) { return m_vecbKey[(int)_eKey]; }
 private:
-	std::vector<bool>m_vecKey;
+	std::vector<bool>m_vecbKey;
 
 };
 

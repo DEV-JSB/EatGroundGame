@@ -16,7 +16,10 @@ void CObjectMgr::Render(HDC _hdc)
 	{
 		auto lst = m_mapObject[(OBJECT)i].begin();
 		while (lst != m_mapObject[(OBJECT)i].end())
+		{
 			(*lst)->Render(_hdc);
+			++lst;
+		}
 	}
 }
 

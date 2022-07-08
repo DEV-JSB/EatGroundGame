@@ -41,13 +41,14 @@ void CScene_start::Init()
 	CBitmapMgr::GetInstance()->BitmapLoad(L"doctorstrangeMenu.bmp");
 
 	
+
 	//Create :  x , y , z , width , height , filename
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(100, 100, 0 , 50 , 50 , L"ironmanMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(200, 100, 0 , 50 , 50 , L"spidermanMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(100, 200, 0 , 50 , 50 , L"warmachineMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(200, 200, 0 , 50 , 50 , L"doctorstrangeMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 4,			 WINY  / 2,	0, 145, 190, L"ironmanMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 2 + WINX / 4, WINY  / 2, 0, 145, 190, L"spidermanMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 4,			 WINY / 2 + WINY/4, 0, 145, 190, L"warmachineMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 2 + WINX / 4, WINY / 2 + WINY/4, 0, 145 , 190 , L"doctorstrangeMenu.bmp"));
 
-
+	m_rcCursor[(int)PHOTO::PHOTO_IRONMAN];
 
 }
 

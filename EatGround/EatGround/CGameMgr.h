@@ -2,8 +2,6 @@
 class CGameMgr
 {
 	SINGLE(CGameMgr);
-
-
 public:
 	void Update();
 	void Init(HWND _hdc, POINT _resolution);

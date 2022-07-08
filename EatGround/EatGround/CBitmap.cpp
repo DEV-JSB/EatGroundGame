@@ -25,15 +25,15 @@ void CBitmap::Render(HDC _hdc)
 	if (m_bRender == false)
 		return;
 	StretchBlt(_hdc
-		, (int)m_vecPos.x - m_stSize.Height / 2
+		, (int)m_vecPos.x - m_stSize.Width/ 2
 		, (int)m_vecPos.y - m_stSize.Height / 2
-		, (int)m_vecPos.x + m_stSize.Height
-		, (int)m_vecPos.y + m_stSize.Width
+		, (int)m_vecPos.x + m_stSize.Width
+		, (int)m_vecPos.y + m_stSize.Height
 		, m_hDC
-		, (int)m_vecPos.x - m_stSize.Height / 2
-		, (int)m_vecPos.y - m_stSize.Height / 2
-		, (int)m_vecPos.x + m_stSize.Width / 2
-		, (int)m_vecPos.y + m_stSize.Height / 2
+		, 0
+		, 0
+		, (int)m_vecPos.x + m_stSize.Width
+		, (int)m_vecPos.y + m_stSize.Height
 		, SRCCOPY);
 }
 

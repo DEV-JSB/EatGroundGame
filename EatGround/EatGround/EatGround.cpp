@@ -3,6 +3,7 @@
 
 #include "pch.h"
 #include"CGameMgr.h"
+#include"CKeyMgr.h"
 
 #define MAX_LOADSTRING 100
 
@@ -53,6 +54,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 // TEST
     {
+        CKeyMgr::GetInstance()->Init();
         CGameMgr::GetInstance()->Init(g_hWnd, POINT({WINX,WINY}));
     }
 // /// // // // / // / // /// 
@@ -72,6 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         else
         {
             CGameMgr::GetInstance()->Render();
+            CKeyMgr::GetInstance()->Update();
         }
     }
     return (int) msg.wParam;
@@ -98,7 +101,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_EATGROUND));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EATGROUND);
+    wcex.lpszMenuName   = NULL;
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 

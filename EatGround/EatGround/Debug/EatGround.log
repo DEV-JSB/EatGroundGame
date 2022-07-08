@@ -1,4 +1,5 @@
 ﻿  CBitmap.cpp
-  CMenuIcon.cpp
-  CScene_start.cpp
+  CBitmapMgr.cpp
+  CGameMgr.cpp
+  EatGround.cpp
   EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe
