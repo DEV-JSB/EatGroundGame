@@ -36,3 +36,18 @@ void CObjectMgr::AddObject(OBJECT _type, CObject* _obj)
 	auto lstiter = m_mapObject.find(_type);
 	(*lstiter).second.push_back(_obj);
 }
+
+int CObjectMgr::Release()
+{
+	for (auto iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)
+	{
+		for (auto lstiter = (*iter).second.begin(); lstiter != (*iter).second.end();)
+		{
+			CObject* temp = (*lstiter);
+			(*iter).second.erase(lstiter++);
+			delete temp;
+			temp = nullptr;
+		}
+	}
+	return 0;
+}

@@ -5,14 +5,17 @@ CScene_end::~CScene_end()
 {
 }
 
-void CScene_end::Update()
+int CScene_end::Update()
 {
+	return 0;
 }
 
-void CScene_end::Render(HDC _hdc)
+int CScene_end::Render(HDC _hdc)
 {
+	return 0;
 }
 
-void CScene_end::Init()
+int CScene_end::Init()
 {
+	return 0;
 }

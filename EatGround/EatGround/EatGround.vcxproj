@@ -156,7 +156,6 @@
     <ClInclude Include="CSceneMgr.h" />
     <ClInclude Include="CScene_end.h" />
     <ClInclude Include="CScene_stage1.h" />
-    <ClInclude Include="CScene_stage2.h" />
     <ClInclude Include="CScene_start.h" />
     <ClInclude Include="CSubject.h" />
     <ClInclude Include="CTimeMgr.h" />
@@ -184,7 +183,6 @@
     <ClCompile Include="CSceneMgr.cpp" />
     <ClCompile Include="CScene_end.cpp" />
     <ClCompile Include="CScene_stage1.cpp" />
-    <ClCompile Include="CScene_stage2.cpp" />
     <ClCompile Include="CScene_start.cpp" />
     <ClCompile Include="CSubject.cpp" />
     <ClCompile Include="CTimeMgr.cpp" />

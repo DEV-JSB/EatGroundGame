@@ -7,6 +7,7 @@ public:
 protected:
 	CComponent();
 	CComponent(bool _render);
+public:
 	virtual ~CComponent();
 protected:
 	bool m_bRender;

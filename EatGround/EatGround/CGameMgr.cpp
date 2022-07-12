@@ -2,6 +2,7 @@
 #include "CGameMgr.h"
 #include "CSceneMgr.h"
 #include "CTimeMgr.h"
+#include"CKeyMgr.h"
 #include "CObjectMgr.h"
 #include"CBitmapMgr.h"
 
@@ -9,6 +10,17 @@ CGameMgr::CGameMgr()
 {}
 CGameMgr::~CGameMgr()
 {}
+
+void CGameMgr::Process()
+{
+	Update();
+	Render();
+}
+void CGameMgr::Update()
+{
+	CKeyMgr::GetInstance()->Update();
+	CSceneMgr::GetInstance()->Update();
+}
 
 void CGameMgr::Init(HWND _hdc,POINT _resolution)
 {

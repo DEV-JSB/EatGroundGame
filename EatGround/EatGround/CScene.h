@@ -8,8 +8,9 @@ protected:
 	CScene();
 	virtual ~CScene();
 public:
-	virtual void Update()			= 0;
-	virtual void Render(HDC _hdc)	= 0;
-	virtual void Init()				= 0;
+	virtual int Update()			= 0;
+	virtual int Render(HDC _hdc)	= 0;
+	virtual int Init()				= 0;
+	virtual int Release()			= 0;
 };
 

@@ -10,6 +10,7 @@ public:
 private:
 	CMenuIcon(const int _x, const int _y, const int _z,const int _width,const int _height, const std::wstring _name);
 	CMenuIcon();
+public:
 	virtual ~CMenuIcon();
 };
 

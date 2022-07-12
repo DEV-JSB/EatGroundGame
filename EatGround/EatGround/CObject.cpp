@@ -17,6 +17,10 @@ CObject::CObject()
 
 CObject::~CObject()
 {
+	CComponent* temp = m_mapComponent[COMPONENT::COMPONENT_TRANSFORM2D];
+	m_mapComponent.clear();
+	delete temp;
+
 }
 CObject::CObject(const int _x, const int _y, const int _z, const int _width, const int _height)
 {
@@ -24,7 +28,6 @@ CObject::CObject(const int _x, const int _y, const int _z, const int _width, con
 	m_pTransform = newTransform;
 	m_mapComponent.insert({ COMPONENT::COMPONENT_TRANSFORM2D,newTransform });
 }
-
 
 
 void CObject::SetBitPosition(const int _x, const int _y)

@@ -15,9 +15,7 @@ int g_arrVK[(int)KEY::KEY_LAST] =
 void CKeyMgr::Init()
 {
 	for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
-	{
-		m_vecbKey.push_back(false);
-	}
+		m_vecstKey.push_back({ false, KEYSTATE::KEYSTATE_NOTPTRESSED,KEYSTATE::KEYSTATE_NOTPTRESSED });
 }
 
 void CKeyMgr::Update()
@@ -28,13 +26,24 @@ void CKeyMgr::Update()
 	{
 		for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
 		{
-			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
+			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000 && m_vecstKey[i].State == KEYSTATE::KEYSTATE_NOTPTRESSED )
 			{
-				printf("키눌림\n");
-				m_vecbKey[i] = true;
+				m_vecstKey[i].PrevState = KEYSTATE::KEYSTATE_NOTPTRESSED;
+				m_vecstKey[i].State = KEYSTATE::KEYSTATE_PRESSED;
+				m_vecstKey[i].IsPress = true;
+				printf("이전에 눌렀던적 없음 , true 전환\n");
+			}
+			else if (GetAsyncKeyState(g_arrVK[i]) & 0x8000 && m_vecstKey[i].State == KEYSTATE::KEYSTATE_PRESSED)
+			{
+				m_vecstKey[i].PrevState = KEYSTATE::KEYSTATE_PRESSED;
+				m_vecstKey[i].State = KEYSTATE::KEYSTATE_PRESSED;
+				m_vecstKey[i].IsPress = true;
 			}
 			else
-				m_vecbKey[i] = false;
+			{
+				m_vecstKey[i].State = KEYSTATE::KEYSTATE_NOTPTRESSED;
+				m_vecstKey[i].IsPress = false;
+			}
 		}
 	}
 	else
@@ -43,13 +52,24 @@ void CKeyMgr::Update()
 		{
 			if (GetAsyncKeyState(g_arrVK[i]) & 0x8000)
 			{
-				printf("키눌림\n");
-				m_vecbKey[i] = false;
+				m_vecstKey[i].State = KEYSTATE::KEYSTATE_NOTPTRESSED;
+				m_vecstKey[i].IsPress = false;
 			}
 		}
 	}
 		
 }
+
+void CKeyMgr::SetFalse()
+{
+	for (int i = 0; i < (int)KEY::KEY_LAST; ++i)
+	{
+		m_vecstKey[i].State = KEYSTATE::KEYSTATE_NOTPTRESSED;
+		m_vecstKey[i].IsPress = false;
+	}
+}
+
+
 
 CKeyMgr::CKeyMgr()
 {

@@ -46,9 +46,6 @@
     <Filter Include="EatGround\02.Scene\Scene_Stage1">
       <UniqueIdentifier>{10b5002a-3d7c-461c-a5da-8477b8c5a06a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EatGround\02.Scene\Scene_Stage2">
-      <UniqueIdentifier>{51ee3719-001a-4839-93af-9d5336268548}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EatGround\02.Scene\Scene_End">
       <UniqueIdentifier>{9d73036f-dbc4-4bfa-afeb-cd3c7d14a75f}</UniqueIdentifier>
     </Filter>
@@ -137,9 +134,6 @@
     <ClInclude Include="CScene_stage1.h">
       <Filter>EatGround\02.Scene\Scene_Stage1</Filter>
     </ClInclude>
-    <ClInclude Include="CScene_stage2.h">
-      <Filter>EatGround\02.Scene\Scene_Stage2</Filter>
-    </ClInclude>
     <ClInclude Include="CScene_end.h">
       <Filter>EatGround\02.Scene\Scene_End</Filter>
     </ClInclude>
@@ -199,9 +193,6 @@
     </ClCompile>
     <ClCompile Include="CScene_stage1.cpp">
       <Filter>EatGround\02.Scene\Scene_Stage1</Filter>
-    </ClCompile>
-    <ClCompile Include="CScene_stage2.cpp">
-      <Filter>EatGround\02.Scene\Scene_Stage2</Filter>
     </ClCompile>
     <ClCompile Include="CScene_end.cpp">
       <Filter>EatGround\02.Scene\Scene_End</Filter>

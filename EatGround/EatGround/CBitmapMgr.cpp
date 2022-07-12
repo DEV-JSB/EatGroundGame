@@ -15,6 +15,8 @@ void CBitmapMgr::Init()
 	wcscat_s(m_szContentPath, L"\\Bitmap\\");
 }
 
+
+
 void CBitmapMgr::BitmapLoad(const std::wstring _filename)
 {
 	CBitmap* newBitmap;
@@ -39,3 +41,42 @@ CBitmap* CBitmapMgr::FindBit(std::wstring _filename) const
 	else
 		return (*iter).second;
 }
+
+void CBitmapMgr::Release()
+{
+	auto iter = m_mapBitmap.begin();
+	for (auto iter = m_mapBitmap.begin(); iter != m_mapBitmap.end(); ++iter)
+	{
+		CBitmap* temp = (*iter).second;
+		delete temp;
+	}
+	m_mapBitmap.clear();
+}
+HRESULT CBitmapMgr::GetPos(std::wstring _filename,Vector2* _pos)
+{
+	auto iter = m_mapBitmap.find(_filename);
+	if (iter == m_mapBitmap.end())
+	{
+		assert(nullptr);
+		_pos = nullptr;
+		return S_FALSE;
+	}
+	_pos->x = (*iter).second->GetPos().x;
+	_pos->y = (*iter).second->GetPos().y;
+	return S_OK;
+}
+
+HRESULT CBitmapMgr::GetBitInfo(std::wstring _filename , BITMAP* _info)
+{
+	auto iter = m_mapBitmap.find(_filename);
+	if (iter == m_mapBitmap.end())
+	{
+		assert(nullptr);
+		_info = nullptr;
+		return S_FALSE;
+	}
+	*_info = (*iter).second->GetInfo();
+	return S_OK;
+	
+}
+

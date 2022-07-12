@@ -73,8 +73,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }
         else
         {
-            CGameMgr::GetInstance()->Render();
-            CKeyMgr::GetInstance()->Update();
+            CGameMgr::GetInstance()->Process();
         }
     }
     return (int) msg.wParam;
@@ -129,7 +128,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
-
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 

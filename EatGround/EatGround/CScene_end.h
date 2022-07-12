@@ -6,8 +6,8 @@ private:
 	CScene_end();
 	virtual ~CScene_end();
 public:
-	virtual void Update()				override;
-	virtual void Render(HDC _hdc)		override;
-	virtual void Init()					override;
+	virtual int Update()				override;
+	virtual int Render(HDC _hdc)		override;
+	virtual int Init()					override;
 };
 
