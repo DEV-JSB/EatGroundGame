@@ -58,6 +58,6 @@ void CObject::Render(HDC _hdc)
 	for (int i = 0; i < (int)COMPONENT::COMPONENT_END; ++i)
 	{
 		if(nullptr != m_mapComponent[(COMPONENT)i])
-		m_mapComponent[(COMPONENT)i]->Render(_hdc);
+			m_mapComponent[(COMPONENT)i]->Render(_hdc);
 	}
 }

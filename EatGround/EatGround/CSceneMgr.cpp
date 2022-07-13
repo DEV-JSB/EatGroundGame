@@ -20,12 +20,15 @@ void CSceneMgr::Update()
 	case SCENE::SCENE_START:
 		m_iImageSelect = m_pCurrentScene->Update();
 		if (m_iImageSelect)
+		{
 			m_eScene = SCENE::SCENE_STAGE1;
+			m_pCurrentScene->Release();
+			m_pCurrentScene = CScene_stage1::Create((IMAGE)m_iImageSelect);
+			m_pCurrentScene->Init();
+		}
 		break;
 	case SCENE::SCENE_STAGE1:
-		m_pCurrentScene->Release();
-		m_pCurrentScene = CScene_stage1::Create((IMAGE)m_iImageSelect);
-		m_pCurrentScene->Init();
+		m_iImageSelect = m_pCurrentScene->Update();
 		break;
 	case SCENE::SCENE_ENDING:
 		break;

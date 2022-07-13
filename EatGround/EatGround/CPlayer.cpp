@@ -18,3 +18,8 @@ CPlayer* CPlayer::Create(const int _x, const int _y, const int _z, const int _wi
 CPlayer::~CPlayer()
 {
 }
+
+void CPlayer::Render(HDC _hdc)
+{
+	CObject::Render(_hdc);
+}

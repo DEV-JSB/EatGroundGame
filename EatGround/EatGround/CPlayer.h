@@ -8,6 +8,8 @@ private:
 public:
 	static CPlayer* Create(const int _x, const int _y, const int _z, const int _width, const int _height, const std::wstring _name);
 	virtual ~CPlayer() override;
+public:
+	virtual void Render(HDC _hdc) override;
 private:
 };
 

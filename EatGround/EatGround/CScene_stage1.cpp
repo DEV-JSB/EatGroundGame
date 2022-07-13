@@ -30,6 +30,8 @@ int CScene_stage1::Update()
 
 int CScene_stage1::Render(HDC _hdc)
 {
+	for (int i = 0; (OBJECT)i < OBJECT::OBJECT_END; ++i)
+		CObjectMgr::GetInstance()->Render(_hdc);
 	return 0;
 }
 
@@ -51,14 +53,14 @@ int CScene_stage1::Init()
 		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	case IMAGE::IMAGE_WARMACHINE:
-		bmpName = L"warmachineMenu";
+		bmpName = L"warmachine.bmp";
 		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	}
 	CBitmapMgr::GetInstance()->BitmapLoad(L"Player.bmp", 0, 128, 128);
 
 	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_PLAYER, CImage::Create(WINX / 2, WINY / 2, 0, 14, 14, L"Player.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2, WINY / 2, 0, WINX - 100, WINY - 100, bmpName));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2, WINY / 2, 0, 600 , 834, bmpName));
 
 
 

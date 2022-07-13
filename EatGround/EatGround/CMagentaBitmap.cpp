@@ -32,15 +32,15 @@ void CMagentaBitmap::Render(HDC _hdc)
 	if (m_bRender == false)
 		return;
 	GdiTransparentBlt(_hdc
-		, (int)m_vecPos.x - m_stSize.Width / 2
-		, (int)m_vecPos.y - m_stSize.Height / 2
-		, (int)m_vecPos.x + m_stSize.Width
-		, (int)m_vecPos.y + m_stSize.Height
+		, (int)(m_vecPos.x - m_stSize.Width * 0.5f)
+		, (int)(m_vecPos.y - m_stSize.Height * 0.5f)
+		, (int)m_stSize.Width
+		, (int)m_stSize.Height
 		, m_hDC
 		, 0
 		, 0
-		, (int)m_vecPos.x + m_stSize.Width
-		, (int)m_vecPos.y + m_stSize.Height
+		, (int)m_bitInfo.bmWidth
+		, (int)m_bitInfo.bmHeight
 		, RGB(m_fR, m_fG, m_fB));
 }
 
