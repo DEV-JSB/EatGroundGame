@@ -10,7 +10,7 @@ public:
 public:
 
 	static CMagentaBitmap* Create(const float _r, const float _g, const float _b);
-	virtual void Update()			override;
+	virtual int Update(const int _xChange, const int _yChange)override;
 	virtual void Render(HDC _hdc)	override;
 
 	void SetMagenta(const float _r, const float _g, const float _b);

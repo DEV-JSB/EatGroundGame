@@ -3,7 +3,12 @@
 #include "CScene_stage1.h"
 #include "CObjectMgr.h"
 #include "CImage.h"
+#include "CPlayer.h"
 #include "CBitmapMgr.h"
+
+#define INGAME_WIDTH 600
+#define INGAME_HEIGHT 834
+
 CScene_stage1::CScene_stage1()
 {
 }
@@ -25,6 +30,8 @@ CScene_stage1* CScene_stage1::Create(IMAGE _Type)
 
 int CScene_stage1::Update()
 {
+	for (int i = 0; (OBJECT)i < OBJECT::OBJECT_END; ++i)
+		CObjectMgr::GetInstance()->Update();
 	return 0;
 }
 
@@ -58,13 +65,16 @@ int CScene_stage1::Init()
 		break;
 	}
 	CBitmapMgr::GetInstance()->BitmapLoad(L"Player.bmp", 0, 128, 128);
+	
+	// 우선 세팅은 이미지의 좌상단으로 고정을 한다
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_PLAYER, CPlayer::Create((int)(WINX * 0.5 - 300), (int)(WINY * 0.5 - 417), 0, 14, 14, L"Player.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create((int)(WINX * 0.5f), (int)(WINY * 0.5f), 0, INGAME_WIDTH, INGAME_HEIGHT, bmpName));
 
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_PLAYER, CImage::Create(WINX / 2, WINY / 2, 0, 14, 14, L"Player.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2, WINY / 2, 0, 600 , 834, bmpName));
-
-
-
-
+	std::list<CObject*> lst = CObjectMgr::GetInstance()->GetObjectList(OBJECT::OBJECT_PLAYER);
+	CObject* tmp = lst.front();
+	CPlayer* player = dynamic_cast<CPlayer*>(tmp);
+	player->SettingMoveNavi((int)(WINX * 0.5f - INGAME_WIDTH * 0.5f), (int)(WINY * 0.5f - INGAME_HEIGHT* 0.5f),
+							(int)(WINX * 0.5f + INGAME_WIDTH * 0.5f), (int)(WINY * 0.5f + INGAME_WIDTH * 0.5f));
 	return 0;
 }
 

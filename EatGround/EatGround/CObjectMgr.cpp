@@ -37,6 +37,20 @@ void CObjectMgr::AddObject(OBJECT _type, CObject* _obj)
 	(*lstiter).second.push_back(_obj);
 }
 
+int CObjectMgr::Update()
+{
+	for (int i = 0; i < (int)OBJECT::OBJECT_END; ++i)
+	{
+		auto lst = m_mapObject[(OBJECT)i].begin();
+		while (lst != m_mapObject[(OBJECT)i].end())
+		{
+			(*lst)->Update();
+			++lst;
+		}
+	}
+	return 0;
+}
+
 int CObjectMgr::Release()
 {
 	for (auto iter = m_mapObject.begin(); iter != m_mapObject.end(); ++iter)

@@ -42,7 +42,16 @@ void CObject::SetBitScale(const int _width, const int _height)
 	bitComponent->ResizeBitmap(_width, _height);
 }
 
-void CObject::Setposition(const int _x, const int _y, const int _z)
+int CObject::MoveTransAndBitPosition(const int _x, const int _y)
+{
+	int x = m_pTransform->GetPosition_X() + _x;
+	int y = m_pTransform->GetPosition_Y() + _y;
+	SetTransfornPosition(x, y, 0);
+	SetBitPosition(x, y);
+	return 0;
+}
+
+void CObject::SetTransfornPosition(const int _x, const int _y, const int _z)
 {
 	m_pTransform->SetPosition((float)_x, (float)_y, (float)_z);
 }
@@ -60,4 +69,9 @@ void CObject::Render(HDC _hdc)
 		if(nullptr != m_mapComponent[(COMPONENT)i])
 			m_mapComponent[(COMPONENT)i]->Render(_hdc);
 	}
+}
+
+int CObject::Update()
+{
+	return 0;
 }

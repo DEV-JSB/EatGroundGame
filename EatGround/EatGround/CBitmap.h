@@ -9,8 +9,8 @@ public:
 public:
 	static CBitmap* Create();
 
-	virtual void Update()			override;
-	virtual void Render(HDC _hdc)	override;
+	virtual int Update(const int _xChange, const int _yChange)	override;
+	virtual void Render(HDC _hdc)								override;
 
 
 	Vector2 GetPos() { return m_vecPos; }

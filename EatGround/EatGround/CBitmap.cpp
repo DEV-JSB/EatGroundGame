@@ -16,8 +16,11 @@ CBitmap* CBitmap::Create()
 	return new CBitmap();
 }
 
-void CBitmap::Update()
+
+int CBitmap::Update(const int _xChange, const int _yChange)
 {
+	RePositionBitmap((int)(m_vecPos.x += _xChange), (int)(m_vecPos.y += _yChange));
+	return 0;
 }
 
 void CBitmap::Render(HDC _hdc)

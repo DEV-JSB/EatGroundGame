@@ -8,6 +8,7 @@ public:
 	void Render(HDC _hdc);
 	void Init();
 	void AddObject(OBJECT _type, CObject* _obj);
+	int Update();
 	int Release();
 	std::list<CObject*> GetObjectList(OBJECT _type) { return m_mapObject[_type]; }
 private:

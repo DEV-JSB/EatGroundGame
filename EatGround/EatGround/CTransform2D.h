@@ -12,7 +12,7 @@ public:
 	CTransform2D();
 	virtual ~CTransform2D();
 public:
-	virtual void Update() override;
+	virtual int Update(const int _xChange, const int _yChange) override;
 	virtual void Render(HDC _hdc) override;
 public:// 임시로 만든거 나중에 고민 해보자
 	Vector3 GetPosition() { return m_vecPosition; }

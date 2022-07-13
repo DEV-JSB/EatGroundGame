@@ -15,11 +15,12 @@ public: // Bitmap Function
 	void SetBitPosition(const int _x, const int _y);
 	void SetBitScale(const int _width, const int _height);
 	void InputBitmap(std::wstring _bmpname);
-	void InputMangentaBitmap(std::wstring _bmpname);
 public:
 	virtual void Render(const HDC _hdc);
+	virtual int Update();
 public:
-	void Setposition(const int _x, const int _y, const int _z);
+	int MoveTransAndBitPosition(const int _x, const int _y);
+	void SetTransfornPosition(const int _x, const int _y, const int _z);
 protected:
 	std::map<COMPONENT, CComponent*> m_mapComponent;
 	CTransform2D* m_pTransform;

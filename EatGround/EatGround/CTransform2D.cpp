@@ -41,8 +41,11 @@ CTransform2D::~CTransform2D()
 {
 }
 
-void CTransform2D::Update()
+int CTransform2D::Update(const int _xChange, const int _yChange)
 {
+	m_vecPosition.x += _xChange;
+	m_vecPosition.y += _yChange;
+	return 0;
 }
 
 void CTransform2D::Render(HDC _hdc)

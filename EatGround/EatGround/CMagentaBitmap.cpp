@@ -23,9 +23,12 @@ CMagentaBitmap* CMagentaBitmap::Create(const float _r, const float _g, const flo
 	return new CMagentaBitmap(_r,_g,_b);
 }
 
-void CMagentaBitmap::Update()
+int CMagentaBitmap::Update(const int _xChange, const int _yChange)
 {
+	CBitmap::Update(_xChange, _yChange);
+	return 0;
 }
+
 
 void CMagentaBitmap::Render(HDC _hdc)
 {
