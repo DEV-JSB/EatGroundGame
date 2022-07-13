@@ -16,8 +16,8 @@ public:
 	void SetMagenta(const float _r, const float _g, const float _b);
 
 private:
-	unsigned char m_fR;
-	unsigned char m_fG;
-	unsigned char m_fB;
+	float m_fR;
+	float m_fG;
+	float m_fB;
 };
 

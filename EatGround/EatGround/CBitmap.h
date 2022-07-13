@@ -2,15 +2,15 @@
 #include"CComponent.h"
 class CBitmap : public CComponent 
 {
-private:
+protected:
 	CBitmap();
 public:
 	virtual ~CBitmap();
 public:
 	static CBitmap* Create();
 
-	virtual void Update() override;
-	virtual void Render(HDC _hdc) override;
+	virtual void Update()			override;
+	virtual void Render(HDC _hdc)	override;
 
 
 	Vector2 GetPos() { return m_vecPos; }
@@ -19,7 +19,7 @@ public:
 	void RePositionBitmap(const int _x, const int _y);
 	void ResizeBitmap(const int _width, const int _height);
 	void BitmapSetting(const HBITMAP _hbit);
-private:
+protected:
 	
 	// 중점으로 부터 출력할 사이즈
 	Size m_stSize;
