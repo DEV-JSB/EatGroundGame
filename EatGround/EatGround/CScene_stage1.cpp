@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "CObjectMgr.h"
 #include "CScene_stage1.h"
-#include"CBitmapMgr.h"
+#include "CObjectMgr.h"
+#include "CImage.h"
+#include "CBitmapMgr.h"
 CScene_stage1::CScene_stage1()
 {
 }
@@ -33,22 +35,33 @@ int CScene_stage1::Render(HDC _hdc)
 
 int CScene_stage1::Init()
 {
+	std::wstring bmpName;
 	switch (m_eBitmapType)
 	{
 	case IMAGE::IMAGE_IRONMAN:
-		CBitmapMgr::GetInstance()->BitmapLoad(L"ironman.bmp");
+		bmpName = L"ironman.bmp";
+		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	case IMAGE::IMAGE_SPIDERMAN:
-		CBitmapMgr::GetInstance()->BitmapLoad(L"spiderman.bmp");
+		bmpName = L"spiderman.bmp";
+		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	case IMAGE::IMAGE_DOCTORSTARNGE:
-		CBitmapMgr::GetInstance()->BitmapLoad(L"doctorstrange.bmp");
+		bmpName = L"doctorstrange.bmp";
+		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	case IMAGE::IMAGE_WARMACHINE:
-		CBitmapMgr::GetInstance()->BitmapLoad(L"warmachineMenu");
+		bmpName = L"warmachineMenu";
+		CBitmapMgr::GetInstance()->BitmapLoad(bmpName);
 		break;
 	}
-	
+	CBitmapMgr::GetInstance()->BitmapLoad(L"Player.bmp", 0, 128, 128);
+
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_PLAYER, CImage::Create(WINX / 2, WINY / 2, 0, 14, 14, L"Player.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2, WINY / 2, 0, WINX - 100, WINY - 100, bmpName));
+
+
+
 
 	return 0;
 }

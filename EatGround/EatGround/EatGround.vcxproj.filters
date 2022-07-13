@@ -73,8 +73,11 @@
     <Filter Include="EatGround\03.Object\UI">
       <UniqueIdentifier>{94a3146c-e1b6-4b0b-9df8-6ab617a59055}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EatGround\03.Object\UI\CMenuIcon">
+    <Filter Include="EatGround\03.Object\UI\CImage">
       <UniqueIdentifier>{a73e2bc8-584b-4a29-bf82-21263d2d8583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EatGround\04.Component\Bitmap\MagentaBitmap">
+      <UniqueIdentifier>{ce5fbd14-8275-4873-a535-193cbae55ae9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -146,8 +149,11 @@
     <ClInclude Include="CSubject.h">
       <Filter>EatGround\Observer</Filter>
     </ClInclude>
-    <ClInclude Include="CMenuIcon.h">
-      <Filter>EatGround\03.Object\UI\CMenuIcon</Filter>
+    <ClInclude Include="CImage.h">
+      <Filter>EatGround\03.Object\UI\CImage</Filter>
+    </ClInclude>
+    <ClInclude Include="CMagentaBitmap.h">
+      <Filter>EatGround\04.Component\Bitmap\MagentaBitmap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +212,11 @@
     <ClCompile Include="CSubject.cpp">
       <Filter>EatGround\Observer</Filter>
     </ClCompile>
-    <ClCompile Include="CMenuIcon.cpp">
-      <Filter>EatGround\03.Object\UI\CMenuIcon</Filter>
+    <ClCompile Include="CImage.cpp">
+      <Filter>EatGround\03.Object\UI\CImage</Filter>
+    </ClCompile>
+    <ClCompile Include="CMagentaBitmap.cpp">
+      <Filter>EatGround\04.Component\Bitmap\MagentaBitmap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

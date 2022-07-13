@@ -3,7 +3,7 @@
 #include "CObject.h"
 #include "CKeyMgr.h"
 #include "CBitmapMgr.h"
-#include "CMenuIcon.h"
+#include "CImage.h"
 #include "CScene_start.h"
 
 #define MENU_COUNT 4
@@ -124,12 +124,11 @@ int CScene_start::Init()
 	CBitmapMgr::GetInstance()->BitmapLoad(L"Logo.bmp");
 	
 
-	//Create :  x , y , z , width , height , filename
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 4		   , WINY  / 2,	0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,		   L"ironmanMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 2 + WINX / 4, WINY  / 2, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,		   L"spidermanMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 4		   , WINY / 2 + WINY / 4, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,   L"warmachineMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_MENUICON, CMenuIcon::Create(WINX / 2 + WINX / 4, WINY / 2 + WINY / 4, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT, L"doctorstrangeMenu.bmp"));
-	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_LOGO,     CMenuIcon::Create(WINX / 2		   , WINY / 4 - 70, 0, 512, 280,	   L"Logo.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 4		   , WINY  / 2,	0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,		   L"ironmanMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2 + WINX / 4, WINY  / 2, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,		   L"spidermanMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 4		   , WINY / 2 + WINY / 4, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT,   L"warmachineMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create(WINX / 2 + WINX / 4, WINY / 2 + WINY / 4, 0, SELECT_MENU_WIDTH, SELECT_MENU_HEIGHT, L"doctorstrangeMenu.bmp"));
+	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_LOGO,  CImage::Create(WINX / 2		   , WINY / 4 - 70, 0, 512, 280,	   L"Logo.bmp"));
 
 	m_rcCursor[(int)PHOTO::PHOTO_IRONMAN];
 	return 0;

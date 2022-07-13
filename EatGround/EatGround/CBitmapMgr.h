@@ -10,7 +10,8 @@ public:
 	void Release();
 	void BitmapLoad(const std::wstring _filename);
 	CBitmap* FindBit(std::wstring _filename) const;
-	
+	void BitmapLoad(const std::wstring _filename, const float _r, const float _g, const float _b);
+
 	HRESULT GetPos(std::wstring _filename, Vector2* _pos);
 	HRESULT GetBitInfo(std::wstring _filename, BITMAP* _info);
 private:

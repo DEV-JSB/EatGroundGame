@@ -15,6 +15,7 @@ public: // Bitmap Function
 	void SetBitPosition(const int _x, const int _y);
 	void SetBitScale(const int _width, const int _height);
 	void InputBitmap(std::wstring _bmpname);
+	void InputMangentaBitmap(std::wstring _bmpname);
 public:
 	virtual void Render(const HDC _hdc);
 public:

@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "CBitmapMgr.h"
+#include"CMagentaBitmap.h"
 #include "CGameMgr.h"
 
 CBitmapMgr::CBitmapMgr()
@@ -24,6 +25,22 @@ void CBitmapMgr::BitmapLoad(const std::wstring _filename)
 	if (nullptr == newBitmap)
 	{
 		newBitmap = CBitmap::Create();
+		std::wstring filepath;
+		filepath += m_szContentPath;
+		filepath += _filename;
+		newBitmap->BitmapSetting(((HBITMAP)LoadImage(nullptr, filepath.c_str(), IMAGE_BITMAP, 0, 0, LR_CREATEDIBSECTION | LR_LOADFROMFILE)));
+
+		m_mapBitmap.insert({ _filename,newBitmap });
+	}
+}
+
+void CBitmapMgr::BitmapLoad(const std::wstring _filename,const float _r,const float _g,const float _b)
+{
+	CBitmap* newBitmap;
+	newBitmap = FindBit(_filename);
+	if (nullptr == newBitmap)
+	{
+		newBitmap = CMagentaBitmap::Create(_r,_g,_b);
 		std::wstring filepath;
 		filepath += m_szContentPath;
 		filepath += _filename;

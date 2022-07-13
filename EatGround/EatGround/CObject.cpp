@@ -52,6 +52,10 @@ void CObject::InputBitmap(std::wstring _bmpname)
 	m_mapComponent.insert({ COMPONENT::COMPONENT_BITMAP,CBitmapMgr::GetInstance()->FindBit(_bmpname) });
 }
 
+void CObject::InputMangentaBitmap(std::wstring _bmpname, const float _r, const float _g, const float _b)
+{
+}
+
 void CObject::Render(HDC _hdc)
 {
 	for(int i = 0; i < (int)COMPONENT::COMPONENT_END; ++i)
