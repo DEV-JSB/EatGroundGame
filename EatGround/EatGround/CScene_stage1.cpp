@@ -30,8 +30,9 @@ CScene_stage1* CScene_stage1::Create(IMAGE _Type)
 
 int CScene_stage1::Update()
 {
-	for (int i = 0; (OBJECT)i < OBJECT::OBJECT_END; ++i)
-		CObjectMgr::GetInstance()->Update();
+	// 오브젝트 매니저가 잘못 되어 있었다.
+
+	CObjectMgr::GetInstance()->Update();
 	return 0;
 }
 
@@ -74,7 +75,7 @@ int CScene_stage1::Init()
 	CObject* tmp = lst.front();
 	CPlayer* player = dynamic_cast<CPlayer*>(tmp);
 	player->SettingMoveNavi((int)(WINX * 0.5f - INGAME_WIDTH * 0.5f), (int)(WINY * 0.5f - INGAME_HEIGHT* 0.5f),
-							(int)(WINX * 0.5f + INGAME_WIDTH * 0.5f), (int)(WINY * 0.5f + INGAME_WIDTH * 0.5f));
+							(int)(WINX * 0.5f + INGAME_WIDTH * 0.5f), (int)(WINY * 0.5f + INGAME_HEIGHT * 0.5f));
 	return 0;
 }
 

@@ -18,6 +18,7 @@ void CGameMgr::Process()
 }
 void CGameMgr::Update()
 {
+	CTimeMgr::GetInstance()->Update();
 	CKeyMgr::GetInstance()->Update();
 	CSceneMgr::GetInstance()->Update();
 }

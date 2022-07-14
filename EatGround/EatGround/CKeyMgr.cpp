@@ -31,7 +31,6 @@ void CKeyMgr::Update()
 				m_vecstKey[i].PrevState = KEYSTATE::KEYSTATE_NOTPTRESSED;
 				m_vecstKey[i].State = KEYSTATE::KEYSTATE_PRESSED;
 				m_vecstKey[i].IsPress = true;
-				printf("이전에 눌렀던적 없음 , true 전환\n");
 			}
 			else if (GetAsyncKeyState(g_arrVK[i]) & 0x8000 && m_vecstKey[i].State == KEYSTATE::KEYSTATE_PRESSED)
 			{
@@ -57,7 +56,6 @@ void CKeyMgr::Update()
 			}
 		}
 	}
-		
 }
 
 void CKeyMgr::SetFalse()

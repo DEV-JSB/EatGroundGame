@@ -44,8 +44,8 @@ void CObject::SetBitScale(const int _width, const int _height)
 
 int CObject::MoveTransAndBitPosition(const int _x, const int _y)
 {
-	int x = m_pTransform->GetPosition_X() + _x;
-	int y = m_pTransform->GetPosition_Y() + _y;
+	int x = (int)m_pTransform->GetPosition_X() + _x;
+	int y = (int)m_pTransform->GetPosition_Y() + _y;
 	SetTransfornPosition(x, y, 0);
 	SetBitPosition(x, y);
 	return 0;

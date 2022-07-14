@@ -33,7 +33,7 @@ void CSceneMgr::Update()
 	case SCENE::SCENE_ENDING:
 		break;
 	}
-		
+	return;
 }
 void CSceneMgr::Init()
 {

@@ -111,7 +111,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW | WS_SYSMENU,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
    g_hWnd = hWnd;
    if (!hWnd)
@@ -126,31 +126,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    /*HANDLE hFile;
-    TCHAR InBuff[1000];
-    TCHAR OutBuff[100] = _T("API 프로그래밍을 못해도 사랑합니다.");
-    DWORD size;
-    HDC hdc;
-    RECT rt;*/
     switch (message)
     {
-    /*case WM_LBUTTONDOWN:
-        hFile = CreateFile(_T("test1.txt")
-            , GENERIC_READ | GENERIC_WRITE
-            , FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, 0);
-        memset(InBuff, 0, sizeof(InBuff));
-        ReadFile(hFile, InBuff, 999 * sizeof(TCHAR), &size, NULL);
-        hdc = GetDC(hWnd);
-        GetClientRect(hWnd, &rt);
-        DrawText(hdc, InBuff, (int)_tcslen(InBuff), &rt, DT_TOP | DT_LEFT);
-        ReleaseDC(hWnd, hdc);
-        WriteFile(hFile, OutBuff, (DWORD)_tcslen(OutBuff) * sizeof(TCHAR), &size, NULL);
-        CloseHandle(hFile);
-        break;*/
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
-            // Parse the menu selections:
             switch (wmId)
             {
             case IDM_ABOUT:
