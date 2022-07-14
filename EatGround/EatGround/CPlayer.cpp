@@ -7,17 +7,15 @@
 #define POINT_START 0
 
 
-
 bool CPlayer::IsGetOutImgaeRange(const int _posx, const int _posy)
 {
 	if (_posx < m_vecMaxRangeLT.x || m_vecMaxRangeRB.x < _posx
 		|| _posy < m_vecMaxRangeLT.y || m_vecMaxRangeRB.y < _posy)
-	{
 		return true;
-	}
 	else
 		return false;
 }
+
 
 bool CPlayer::IsInRange(LINE _etype, const int _posx, const int _posy)
 {
@@ -133,12 +131,40 @@ int CPlayer::LateUpdate()
 		IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y())))
 	{
 		SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END, true);
+		
+		RemakeLine();
+
+
 		SaveDrawLineToList();
 		m_bDrawingLine = false;
-		printf("라인 최종 저장!!\n");
+		
+		m_vecEatingEndPos.x = (int)m_pTransform->GetPosition_X();
+		m_vecEatingEndPos.y = (int)m_pTransform->GetPosition_Y();
+
+		// 같은 y 축의 최종값 , 같은 x 축의 최종값 , 최대 최솟값을 통해서 새로운 영역을 그려낸다
+		// 땅따먹기는 결과적으로 아니 , 최종적으로 면적이 늘어난다.
+		// 즉 면적이 무조건 늘어나게 되어있다
+		// 점들을 다 검사하면 어떨까
+		// 점들을 다 모아서 검사를 하면 ?? 
+		// 점들을 다 검사를 해보자.
+		// 내부에 있는 점들을 갱신을 시켜서 없애자
+		// 내부에 있는 점들을 갱신해서 최종 점을 만들어야 한다.
 	}
 	return 0;
 }
+
+int CPlayer::RemakeLine()
+{
+	// 찍히는 시작 점과 끝을 기준으로 정한다.
+	m_vecEatingEndPos;
+	m_vecEatingStartPos;
+
+
+
+	return 0;
+}
+
+
 
 int CPlayer::SaveDrawLineToList()
 {
@@ -149,6 +175,8 @@ int CPlayer::SaveDrawLineToList()
 	m_lstDrawingLine.clear();
 	return 0;
 }
+
+
 
 
 CPlayer::CPlayer(const int _x, const int _y, const int _z, const int _width, const int _height, const std::wstring _name)
@@ -193,12 +221,16 @@ int CPlayer::Update()
 		{
 			m_bDrawingLine = true;
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_START, true);
-			printf("시작점 저장 x : %f , y : %f\n", m_pTransform->GetPosition_X(), m_pTransform->GetPosition_Y());
+
+			m_vecEatingStartPos.x = (int)m_pTransform->GetPosition_X();
+			m_vecEatingStartPos.y = (int)m_pTransform->GetPosition_Y();
+			
 			m_vecPrevMoveDirection = { 0,0 };
 		}
 		// If Holding Space and Enter Drawing Mode then player Can't move InArea OnlyNew Position can move
 		if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_LEFT).IsPress)
 		{
+			
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END,
 				0 != m_vecPrevMoveDirection.y);
 			if (false == IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X() - 1, (int)m_pTransform->GetPosition_Y())
@@ -234,8 +266,8 @@ int CPlayer::Update()
 		{ 
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END, 
 				0 != m_vecPrevMoveDirection.x);
-			if (false == IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() + 1)
-				&& !(IsGetOutImgaeRange((int)m_pTransform->GetPosition_X() - 1, (int)m_pTransform->GetPosition_Y() + 1)))
+			if (false == IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() + 1)
+				&& !(IsGetOutImgaeRange((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() + 1)))
 			{
 				CObject::MoveTransAndBitPosition(0, 1);
 				m_vecPrevMoveDirection = { 0,1 };

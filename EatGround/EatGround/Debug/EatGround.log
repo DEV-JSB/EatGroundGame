@@ -1,2 +1,5 @@
-﻿  EatGround.cpp
-  EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe
+﻿  CComponent.cpp
+  CKeyMgr.cpp
+  CMagentaBitmap.cpp
+  CPlayer.cpp
+  EatGround.vcxproj -> C:\Users\Admin\source\repos\DEV-JSB\EatGroundGame\EatGround\Debug\EatGround.exe
