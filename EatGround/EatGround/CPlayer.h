@@ -24,9 +24,11 @@ private:
 	int SaveLine(const int _x, const int _y, const int _type, bool _directionchange);
 	int DrawLineRange(HDC _hdc);
 	int DrawDrawingLine(HDC _hdc);
-	int LateUpdate();
 	int SaveDrawLineToList();
 	int RemakeLine();
+	bool PointIsInLine(const Vector2 _point,const Line _line);
+private:
+	int LateUpdate();
 private:
 	CPlayer();
 	CPlayer(const int _x, const int _y, const int _z, const int _width, const int _height, const std::wstring _name);

@@ -159,9 +159,47 @@ int CPlayer::RemakeLine()
 	m_vecEatingEndPos;
 	m_vecEatingStartPos;
 
+	// 지금의 경우는 가에의 선분을 제외한 경우이다.
+	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
+	{
+		// 시작 점과 관련이 되어있는 선분을 찾았다 . 이제 방향성을 구해보자.
+		if (PointIsInLine(m_vecEatingStartPos, (*iter)))
+		{
+			float direction_X;
+			float direction_Y;
+
+		}
+	}
 
 
 	return 0;
+}
+
+bool CPlayer::PointIsInLine(const Vector2 _point, const Line _line)
+{
+	switch (_line.type)
+	{
+	case LINE::LINE_WIDTH:
+			if (_line.start.y == _point.y &&
+				_line.start.x <= _point.x &&
+				_point.x <= _line.end.x)
+				return true;
+			else if (_line.start.y == _point.y &&
+				_line.end.x <= _point.x &&
+				_point.x <= _line.start.x)
+				return true;
+		break;
+	case LINE::LINE_HEIGHT:
+			if (_line.start.x == _point.x &&
+				_line.start.y <= _point.y &&
+				_point.y <= _line.end.y)
+				return true;
+			else if (_line.start.x == _point.x &&
+				_line.end.y <= _point.y &&
+				_point.y <= _line.start.y)
+				return true;
+		break;
+	}
 }
 
 
