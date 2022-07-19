@@ -154,12 +154,12 @@ int CPlayer::LateUpdate()
 }
 
 
-
-bool CPlayer::MeetOnEndLine(const Line _line, const Vector2 _lastpos, const Vector2 _startpos)
+// 끝점이 위치해 있냐 , 시작점이 끝점과 같으며 , 내가 그린 라인의 끝점이 라인에 포함이 되어 있는지 확인하는 함수
+bool CPlayer::MeetOnEndLine(const Line _line, const Vector2 _lastpos, const POINT _startpos)
 {
 	if (_line.start.x == _startpos.x && _line.start.y == _startpos.y)
 	{
-		if (PointIsInLine(_startpos, _line))
+		if (PointIsInLine(Vector2{ (float)_lastpos.x,(float)_lastpos.y}, _line))
 			return true;
 		else
 			return false;
@@ -179,102 +179,112 @@ int CPlayer::RemakeLine()
 	TestList1 = m_lstDrawingLine;
 
 	TestList2 = m_lstDrawingLine;
-
+	
+	std::list<Line>::iterator iter = m_lstLine.begin();
 	// Temp1 끝점 설정탐색!!!!!!
-		for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
+	for (; iter != m_lstLine.end(); ++iter)
+	{
+		// 시작 점과 관련이 되어있는 선분을 찾았다 .
+		if (PointIsInLine(m_vecEatingEndPos, (*iter)))
 		{
-			// 시작 점과 관련이 되어있는 선분을 찾았다 .
-			if (PointIsInLine(m_vecEatingEndPos, (*iter)))
-			{
-				// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
-				// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
-				Line temp;
-				temp.start.x = (int)m_vecEatingEndPos.x;
-				temp.start.y = (int)m_vecEatingEndPos.y;
-				temp.end.x = (*iter).end.x;
-				temp.end.y = (*iter).end.y;
-				temp.type = (*iter).type;
-				EndSearchLine = (*iter).end;
-				TestList1.push_back(temp);
-				break;
-			}
+			// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
+			// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
+			Line temp;
+			temp.start.x = (int)m_vecEatingEndPos.x;
+			temp.start.y = (int)m_vecEatingEndPos.y;
+			temp.end.x = (*iter).end.x;
+			temp.end.y = (*iter).end.y;
+			temp.type = (*iter).type;
+			EndSearchLine = (*iter++).end;
+			TestList1.push_back(temp);
+			break;
 		}
-		std::list<Line>::iterator iter2 = m_lstLine.begin();
-		while (!(PointIsInLine(m_vecEatingStartPos, (*iter2))))
+	}
+	while (1)
+	{
+
+		if (iter == m_lstLine.end())
+			iter = m_lstLine.begin();
+		// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
+		if (MeetOnEndLine((*iter), m_vecEatingStartPos, EndSearchLine))
 		{
-			for (; iter2 != m_lstLine.end(); ++iter2)
-			{
-				// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
-				if (EndSearchLine.x == (*iter2).start.x && EndSearchLine.y == (*iter2).start.y)
-				{
-					TestList1.push_back((*iter2));
-					EndSearchLine = (*iter2).end;
-					break;
-				}
-			}
-			if (iter2 == m_lstLine.end())
-				iter2 = m_lstLine.begin();
+			Line temp;
+			temp.start = (*iter).start;
+			temp.end.x = (int)m_vecEatingStartPos.x;
+			temp.end.y = (int)m_vecEatingStartPos.y;
+			temp.type = (*iter).type;
+			TestList1.push_back(temp);
+			m_lstLine = TestList1;
+			TestList1.clear();
+			m_lstDrawingLine.clear();
+			break;
 		}
-
-		TestList1.pop_back();
-		Line temp;
-		temp.start = (*iter2).start;
-		temp.end.x = (int)m_vecEatingStartPos.x;
-		temp.end.y = (int)m_vecEatingStartPos.y;
-		temp.type = (*iter2).type;
-		TestList1.push_back(temp);
-
-		m_lstLine = TestList1;
+		else if (EndSearchLine.x == (*iter).start.x && EndSearchLine.y == (*iter).start.y)
+		{
+			EndSearchLine = (*iter).end;
+			TestList1.push_back((*iter++));
+			continue;
+		}
+		else
+			++iter;
+	}
+	Line temp;
 	
 
-	// Temp2 끝점 탐색!!
-		for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
-		{
-			// 시작 점과 관련이 되어있는 선분을 찾았다 .
- 			if (PointIsInLine(m_vecEatingEndPos, (*iter)))
-			{
-				// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
-				// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
-				Line temp;
-				temp.start.x = (int)m_vecEatingEndPos.x;
-				temp.start.y = (int)m_vecEatingEndPos.y;
-				temp.end.x = (*iter).start.x;
-				temp.end.y = (*iter).start.y;
-				temp.type = (*iter).type;
-				EndSearchLine = (*iter).start;
-				TestList2.push_back(temp);
-				break;
-			}
-		}
-		iter2 = m_lstLine.begin();
-		while (!(PointIsInLine(m_vecEatingStartPos, (*iter2))))
-		{
-			for (; iter2 != m_lstLine.end(); ++iter2)
-			{
-				// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
-				if (EndSearchLine.x == (*iter2).end.x && EndSearchLine.y == (*iter2).end.y)
-				{
-					TestList2.push_back((*iter2));
-					EndSearchLine = (*iter2).end;
-					break;
-				}
-			}
-			if (iter2 == m_lstLine.end())
-				iter2 = m_lstLine.begin();
-		}
+	//// Temp2 끝점 탐색!!
+	//iter = m_lstLine.begin();
+	//for (; iter != m_lstLine.end(); ++iter)
+	//{
+	//	// 시작 점과 관련이 되어있는 선분을 찾았다 .
+ //		if (PointIsInLine(m_vecEatingEndPos, (*iter)))
+	//	{
+	//		// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
+	//		// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
+	//		Line temp;
+	//		temp.start.x = (int)m_vecEatingStartPos.x;
+	//		temp.start.y = (int)m_vecEatingStartPos.y;
+	//		temp.end.x = (*iter).start.x;
+	//		temp.end.y = (*iter).start.y;
+	//		temp.type = (*iter).type;
+	//		EndSearchLine = (*iter).start;
+	//		TestList2.push_back(temp);
+	//		break;
+	//	}
+	//}
+	//
+	//while (1)
+	//{
+	//	if (iter == m_lstLine.end())
+	//		iter = m_lstLine.begin();
+	//	// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
+	//	if (MeetOnEndLine((*iter), m_vecEatingStartPos, EndSearchLine))
+	//	{
+	//		Line temp;
+	//		temp.start = (*iter).start;
+	//		temp.end.x = (int)m_vecEatingStartPos.x;
+	//		temp.end.y = (int)m_vecEatingStartPos.y;
+	//		temp.type = (*iter).type;
+	//		TestList1.push_back(temp);
+	//		break;
+	//	}
+	//	else if (EndSearchLine.x == (*iter).start.x && EndSearchLine.y == (*iter).start.y)
+	//	{
+	//		EndSearchLine = (*iter).end;
+	//		TestList1.push_back((*iter++));
+	//		continue;
+	//	}
+	//	else
+	//		++iter;
+	//}
+	//
+	//DrawLine(TestList2, CGameMgr::GetInstance()->Get_DBufferDC(), 120, 120, 120);
 
-		TestList2.pop_back();
-		temp.start = (*iter2).end;
-		temp.end.x = (int)m_vecEatingStartPos.x;
-		temp.end.y = (int)m_vecEatingStartPos.y;
-		temp.type = (*iter2).type;
-		TestList2.push_back(temp);
-
-		DrawLine(TestList2, CGameMgr::GetInstance()->Get_DBufferDC(), 120, 120, 120);
+	//m_lstDrawingLine.clear();
 
 
-		//m_lstLine = TestList2;
-	m_lstDrawingLine.clear();
+
+
+
 
 	return 0;
 }

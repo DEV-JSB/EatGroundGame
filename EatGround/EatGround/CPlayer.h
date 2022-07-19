@@ -12,7 +12,7 @@ enum class LINE
 class CPlayer : public CObject
 {
 private:
-	bool MeetOnEndLine(const Line _line, const Vector2 _lastpos, const Vector2 _startpos);
+	bool MeetOnEndLine(const Line _line, const Vector2 _lastpos, const POINT _startpos);
 	int DrawLine(std::list<Line>& _linelst, const HDC _hdc, const BYTE _r, const BYTE _g, const BYTE _b);
 	bool CanAdvance();
 	bool IsGetOutImgaeRange(const int _posx, const int _posy);
