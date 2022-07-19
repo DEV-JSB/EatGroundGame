@@ -1,11 +1,1 @@
-﻿  CPlayer.cpp
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(141,57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(142,57): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(168,10): warning C4101: 'direction_X': unreferenced local variable
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(169,10): warning C4101: 'direction_Y': unreferenced local variable
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(263,60): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(264,60): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(203): warning C4715: 'CPlayer::PointIsInLine': not all control paths return a value
-  CScene_stage1.cpp
-  EatGround.cpp
-  EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe
+﻿  EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe

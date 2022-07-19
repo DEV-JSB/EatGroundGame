@@ -131,15 +131,15 @@ int CPlayer::LateUpdate()
 		IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y())))
 	{
 		SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END, true);
-		
+		m_vecEatingEndPos.x = (float)m_pTransform->GetPosition_X();
+		m_vecEatingEndPos.y = (float)m_pTransform->GetPosition_Y();
 		RemakeLine();
 
 
-		SaveDrawLineToList();
+		//SaveDrawLineToList();
 		m_bDrawingLine = false;
 		
-		m_vecEatingEndPos.x = (int)m_pTransform->GetPosition_X();
-		m_vecEatingEndPos.y = (int)m_pTransform->GetPosition_Y();
+		
 
 		// 같은 y 축의 최종값 , 같은 x 축의 최종값 , 최대 최솟값을 통해서 새로운 영역을 그려낸다
 		// 땅따먹기는 결과적으로 아니 , 최종적으로 면적이 늘어난다.
@@ -162,15 +162,23 @@ int CPlayer::RemakeLine()
 	// 지금의 경우는 가에의 선분을 제외한 경우이다.
 	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
 	{
-		// 시작 점과 관련이 되어있는 선분을 찾았다 . 이제 방향성을 구해보자.
+		// 시작 점과 관련이 되어있는 선분을 찾았다 .
 		if (PointIsInLine(m_vecEatingStartPos, (*iter)))
 		{
-			float direction_X;
-			float direction_Y;
-
+			(*iter).end.x = m_vecEatingStartPos.x;
+			(*iter).end.y = m_vecEatingStartPos.y;
+		}
+		else if (PointIsInLine(m_vecEatingEndPos, (*iter)))
+		{
+			(*iter).start.x = m_vecEatingEndPos.x;
+			(*iter).start.y = m_vecEatingEndPos.y;
 		}
 	}
 
+	for (std::list<Line>::iterator iter = m_lstDrawingLine.begin(); iter != m_lstDrawingLine.end(); ++iter)
+	{
+		m_lstLine.push_back(*iter);
+	}
 
 	return 0;
 }
@@ -200,6 +208,7 @@ bool CPlayer::PointIsInLine(const Vector2 _point, const Line _line)
 				return true;
 		break;
 	}
+	return false;
 }
 
 
@@ -260,8 +269,8 @@ int CPlayer::Update()
 			m_bDrawingLine = true;
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_START, true);
 
-			m_vecEatingStartPos.x = (int)m_pTransform->GetPosition_X();
-			m_vecEatingStartPos.y = (int)m_pTransform->GetPosition_Y();
+			m_vecEatingStartPos.x = (float)m_pTransform->GetPosition_X();
+			m_vecEatingStartPos.y = (float)m_pTransform->GetPosition_Y();
 			
 			m_vecPrevMoveDirection = { 0,0 };
 		}
@@ -369,20 +378,20 @@ int CPlayer::SettingMoveNavi(const int _left, const int _top, const int _right, 
 	tmp.end = { _right , _top };
 	tmp.type = LINE::LINE_WIDTH;
 
-	m_lstLine.push_back({ { _left , _top } , { _right , _top } , LINE::LINE_WIDTH });
-	
-	tmp.start = { _left , _bottom};
-	tmp.end = { _right , _bottom };
-	tmp.type = LINE::LINE_WIDTH;
 	m_lstLine.push_back(tmp);
-
-	tmp.start = { _left , _top };
-	tmp.end = { _left , _bottom };
+	
+	tmp.start = { _right , _top };
+	tmp.end = { _right , _bottom };
 	tmp.type = LINE::LINE_HEIGHT;
 	m_lstLine.push_back(tmp);
 
-	tmp.start = { _right , _top };
-	tmp.end = { _right , _bottom };
+	tmp.start = { _right , _bottom };
+	tmp.end = { _left , _bottom };
+	tmp.type = LINE::LINE_WIDTH;
+	m_lstLine.push_back(tmp);
+
+	tmp.start = { _left , _bottom };
+	tmp.end = { _left , _top };
 	tmp.type = LINE::LINE_HEIGHT;
 	m_lstLine.push_back(tmp);
 

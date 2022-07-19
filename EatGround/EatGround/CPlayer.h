@@ -8,13 +8,6 @@ enum class LINE
 	LINE_HEIGHT, 
 	LINE_END 
 };
-struct Line
-{
-	POINT start;
-	POINT end;
-	LINE type;
-};
-
 
 class CPlayer : public CObject
 {
@@ -45,6 +38,7 @@ private:
 	Line				m_stTempLine;
 	std::list<Line>		m_lstDrawingLine;
 	std::list<Line>		m_lstLine;
+	
 
 
 	Vector2				m_vecPrevMoveDirection;

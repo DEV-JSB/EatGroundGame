@@ -1,5 +1,16 @@
 #pragma once
 
+enum class LINE;
+
+
+
+struct Line
+{
+	POINT start;
+	POINT end;
+	LINE type;
+};
+
 
 typedef struct MySize
 {

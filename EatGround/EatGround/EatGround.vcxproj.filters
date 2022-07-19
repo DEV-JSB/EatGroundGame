@@ -79,6 +79,9 @@
     <Filter Include="EatGround\04.Component\Bitmap\MagentaBitmap">
       <UniqueIdentifier>{ce5fbd14-8275-4873-a535-193cbae55ae9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EatGround\03.Object\CField">
+      <UniqueIdentifier>{55971b20-fbdb-4477-8284-d00673d8e88f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -155,6 +158,9 @@
     <ClInclude Include="CMagentaBitmap.h">
       <Filter>EatGround\04.Component\Bitmap\MagentaBitmap</Filter>
     </ClInclude>
+    <ClInclude Include="CField.h">
+      <Filter>EatGround\03.Object\CField</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EatGround.cpp" />
@@ -217,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="CMagentaBitmap.cpp">
       <Filter>EatGround\04.Component\Bitmap\MagentaBitmap</Filter>
+    </ClCompile>
+    <ClCompile Include="CField.cpp">
+      <Filter>EatGround\03.Object\CField</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
