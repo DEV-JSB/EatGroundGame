@@ -155,24 +155,34 @@ int CPlayer::LateUpdate()
 
 int CPlayer::RemakeLine()
 {
+	bool MeetEndLine = false;
 	// 찍히는 시작 점과 끝을 기준으로 정한다.
 	m_vecEatingEndPos;
 	m_vecEatingStartPos;
 
 	// 지금의 경우는 가에의 선분을 제외한 경우이다.
-	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
+	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end();)
 	{
 		// 시작 점과 관련이 되어있는 선분을 찾았다 .
 		if (PointIsInLine(m_vecEatingStartPos, (*iter)))
 		{
-			(*iter).end.x = m_vecEatingStartPos.x;
-			(*iter).end.y = m_vecEatingStartPos.y;
+			(*iter).end.x = (int)m_vecEatingStartPos.x;
+			(*iter).end.y = (int)m_vecEatingStartPos.y;
+			MeetEndLine = true;
+			++iter;
 		}
 		else if (PointIsInLine(m_vecEatingEndPos, (*iter)))
 		{
-			(*iter).start.x = m_vecEatingEndPos.x;
-			(*iter).start.y = m_vecEatingEndPos.y;
+			(*iter).start.x = (int)m_vecEatingEndPos.x;
+			(*iter).start.y = (int)m_vecEatingEndPos.y;
+			
 		}
+		if (MeetEndLine && iter != m_lstLine.end())
+			m_lstLine.erase(iter++);
+		else if (iter == m_lstLine.end())
+			break;
+		else
+			++iter;
 	}
 
 	for (std::list<Line>::iterator iter = m_lstDrawingLine.begin(); iter != m_lstDrawingLine.end(); ++iter)

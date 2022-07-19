@@ -39,6 +39,7 @@ private:
 	std::list<Line>		m_lstDrawingLine;
 	std::list<Line>		m_lstLine;
 	
+	std::list<POINT>	m_lstPoint;
 
 
 	Vector2				m_vecPrevMoveDirection;
