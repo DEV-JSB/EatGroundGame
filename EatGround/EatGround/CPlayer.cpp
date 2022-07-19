@@ -1,4 +1,7 @@
 #include "pch.h"
+// must remove
+#include"CGameMgr.h"
+//  ////////////
 #include "CKeyMgr.h"
 #include "CTimeMgr.h"
 #include "CPlayer.h"
@@ -6,6 +9,21 @@
 #define POINT_END 1
 #define POINT_START 0
 
+
+
+// 나중에 이거 움직일 수 없는 범위를 지정을 해줘야함 다른 반대의 영역에 위치해있다면 움직일 수 없도록 해야함
+bool CPlayer::CanAdvance()
+{
+	if (!(IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X() + 1, (int)m_pTransform->GetPosition_Y())))
+		return true;
+ 	if (!(IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X() - 1, (int)m_pTransform->GetPosition_Y())))
+		return true;
+	if (!(IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() + 1)))
+		return true;
+	if (!(IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() - 1)))
+		return true;
+	return false;
+}
 
 bool CPlayer::IsGetOutImgaeRange(const int _posx, const int _posy)
 {
@@ -19,6 +37,9 @@ bool CPlayer::IsGetOutImgaeRange(const int _posx, const int _posy)
 
 bool CPlayer::IsInRange(LINE _etype, const int _posx, const int _posy)
 {
+	if (_posx < m_vecMaxRangeLT.x || m_vecMaxRangeRB.x < _posx
+		|| _posy < m_vecMaxRangeLT.y || m_vecMaxRangeRB.y < _posy)
+		return false;
 	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
 	{
 		switch (_etype)
@@ -76,44 +97,24 @@ int CPlayer::SaveLine(const int _x, const int _y, const int _type,bool _directio
 		m_lstDrawingLine.push_back(m_stTempLine);
 		m_stTempLine.start.x = _x;
 		m_stTempLine.start.y = _y;
-		printf("라인 저장!\n");
 		break;
 	}
 	return 0;
 }
 
-int CPlayer::DrawLineRange(HDC _hdc)
+
+
+int CPlayer::DrawLine(std::list<Line>& _linelst,const HDC _hdc, const BYTE _r,const BYTE _g ,const BYTE _b)
 {
 	if (m_lstLine.size() == 0)
 		return 0;
 	HPEN hPen;
 	HPEN hPenOld;
 
-	hPen = CreatePen(PS_SOLID, 5, RGB(100, 100, 100));
+	hPen = CreatePen(PS_SOLID, 5, RGB(_r, _g, _b));
 	hPenOld = (HPEN)SelectObject(_hdc, hPen);
 
-	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
-	{
-		MoveToEx(_hdc, (*iter).start.x, (*iter).start.y, NULL);
-		LineTo(_hdc, (*iter).end.x, (*iter).end.y);
-	}
-
-	hPen = (HPEN)SelectObject(_hdc, hPenOld);
-	DeleteObject(hPen);
-	return 0;
-}
-
-int CPlayer::DrawDrawingLine(HDC _hdc)
-{
-	if (m_lstDrawingLine.size() == 0)
-		return 0;
-	HPEN hPen;
-	HPEN hPenOld;
-
-	hPen = CreatePen(PS_SOLID, 5, RGB(200, 200, 200));
-	hPenOld = (HPEN)SelectObject(_hdc, hPen);
-
-	for (std::list<Line>::iterator iter = m_lstDrawingLine.begin(); iter != m_lstDrawingLine.end(); ++iter)
+	for (std::list<Line>::iterator iter = _linelst.begin(); iter != _linelst.end(); ++iter)
 	{
 		MoveToEx(_hdc, (*iter).start.x, (*iter).start.y, NULL);
 		LineTo(_hdc, (*iter).end.x, (*iter).end.y);
@@ -126,7 +127,7 @@ int CPlayer::DrawDrawingLine(HDC _hdc)
 
 int CPlayer::LateUpdate()
 {
-	if (m_bDrawingLine && m_lstDrawingLine.size() > 0 && 
+	if (m_bDrawingLine && m_lstDrawingLine.size() > 0&& 
 		(IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y()) || 
 		IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y())))
 	{
@@ -138,7 +139,6 @@ int CPlayer::LateUpdate()
 
 		//SaveDrawLineToList();
 		m_bDrawingLine = false;
-		
 		
 
 		// 같은 y 축의 최종값 , 같은 x 축의 최종값 , 최대 최솟값을 통해서 새로운 영역을 그려낸다
@@ -153,42 +153,128 @@ int CPlayer::LateUpdate()
 	return 0;
 }
 
+
+
+bool CPlayer::MeetOnEndLine(const Line _line, const Vector2 _lastpos, const Vector2 _startpos)
+{
+	if (_line.start.x == _startpos.x && _line.start.y == _startpos.y)
+	{
+		if (PointIsInLine(_startpos, _line))
+			return true;
+		else
+			return false;
+	}
+	return false;
+}
+
 int CPlayer::RemakeLine()
 {
-	bool MeetEndLine = false;
 	// 찍히는 시작 점과 끝을 기준으로 정한다.
-	m_vecEatingEndPos;
-	m_vecEatingStartPos;
 
-	// 지금의 경우는 가에의 선분을 제외한 경우이다.
-	for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end();)
-	{
-		// 시작 점과 관련이 되어있는 선분을 찾았다 .
-		if (PointIsInLine(m_vecEatingStartPos, (*iter)))
-		{
-			(*iter).end.x = (int)m_vecEatingStartPos.x;
-			(*iter).end.y = (int)m_vecEatingStartPos.y;
-			MeetEndLine = true;
-			++iter;
-		}
-		else if (PointIsInLine(m_vecEatingEndPos, (*iter)))
-		{
-			(*iter).start.x = (int)m_vecEatingEndPos.x;
-			(*iter).start.y = (int)m_vecEatingEndPos.y;
-			
-		}
-		if (MeetEndLine && iter != m_lstLine.end())
-			m_lstLine.erase(iter++);
-		else if (iter == m_lstLine.end())
-			break;
-		else
-			++iter;
-	}
+	POINT EndSearchLine;
+	std::list<Line> TestList1;
+	std::list<Line> TestList2;
 
-	for (std::list<Line>::iterator iter = m_lstDrawingLine.begin(); iter != m_lstDrawingLine.end(); ++iter)
-	{
-		m_lstLine.push_back(*iter);
-	}
+
+	TestList1 = m_lstDrawingLine;
+
+	TestList2 = m_lstDrawingLine;
+
+	// Temp1 끝점 설정탐색!!!!!!
+		for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
+		{
+			// 시작 점과 관련이 되어있는 선분을 찾았다 .
+			if (PointIsInLine(m_vecEatingEndPos, (*iter)))
+			{
+				// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
+				// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
+				Line temp;
+				temp.start.x = (int)m_vecEatingEndPos.x;
+				temp.start.y = (int)m_vecEatingEndPos.y;
+				temp.end.x = (*iter).end.x;
+				temp.end.y = (*iter).end.y;
+				temp.type = (*iter).type;
+				EndSearchLine = (*iter).end;
+				TestList1.push_back(temp);
+				break;
+			}
+		}
+		std::list<Line>::iterator iter2 = m_lstLine.begin();
+		while (!(PointIsInLine(m_vecEatingStartPos, (*iter2))))
+		{
+			for (; iter2 != m_lstLine.end(); ++iter2)
+			{
+				// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
+				if (EndSearchLine.x == (*iter2).start.x && EndSearchLine.y == (*iter2).start.y)
+				{
+					TestList1.push_back((*iter2));
+					EndSearchLine = (*iter2).end;
+					break;
+				}
+			}
+			if (iter2 == m_lstLine.end())
+				iter2 = m_lstLine.begin();
+		}
+
+		TestList1.pop_back();
+		Line temp;
+		temp.start = (*iter2).start;
+		temp.end.x = (int)m_vecEatingStartPos.x;
+		temp.end.y = (int)m_vecEatingStartPos.y;
+		temp.type = (*iter2).type;
+		TestList1.push_back(temp);
+
+		m_lstLine = TestList1;
+	
+
+	// Temp2 끝점 탐색!!
+		for (std::list<Line>::iterator iter = m_lstLine.begin(); iter != m_lstLine.end(); ++iter)
+		{
+			// 시작 점과 관련이 되어있는 선분을 찾았다 .
+ 			if (PointIsInLine(m_vecEatingEndPos, (*iter)))
+			{
+				// 그린 라인을 기준으로 제일 마지막에 그린 점이 끝이다.
+				// 끝점을 만날때까지 반복함으로 이건 탐색이 맞다.
+				Line temp;
+				temp.start.x = (int)m_vecEatingEndPos.x;
+				temp.start.y = (int)m_vecEatingEndPos.y;
+				temp.end.x = (*iter).start.x;
+				temp.end.y = (*iter).start.y;
+				temp.type = (*iter).type;
+				EndSearchLine = (*iter).start;
+				TestList2.push_back(temp);
+				break;
+			}
+		}
+		iter2 = m_lstLine.begin();
+		while (!(PointIsInLine(m_vecEatingStartPos, (*iter2))))
+		{
+			for (; iter2 != m_lstLine.end(); ++iter2)
+			{
+				// 이전에 그었던 끝점이 시작점이라면 pushback 을 하고 끝점을 갱신한다.
+				if (EndSearchLine.x == (*iter2).end.x && EndSearchLine.y == (*iter2).end.y)
+				{
+					TestList2.push_back((*iter2));
+					EndSearchLine = (*iter2).end;
+					break;
+				}
+			}
+			if (iter2 == m_lstLine.end())
+				iter2 = m_lstLine.begin();
+		}
+
+		TestList2.pop_back();
+		temp.start = (*iter2).end;
+		temp.end.x = (int)m_vecEatingStartPos.x;
+		temp.end.y = (int)m_vecEatingStartPos.y;
+		temp.type = (*iter2).type;
+		TestList2.push_back(temp);
+
+		DrawLine(TestList2, CGameMgr::GetInstance()->Get_DBufferDC(), 120, 120, 120);
+
+
+		//m_lstLine = TestList2;
+	m_lstDrawingLine.clear();
 
 	return 0;
 }
@@ -265,8 +351,9 @@ void CPlayer::Render(HDC _hdc)
 {
 	CObject::Render(_hdc);
 
-	DrawLineRange(_hdc);
-	DrawDrawingLine(_hdc);
+	DrawLine(m_lstLine,_hdc,100,100,100);
+	DrawLine(m_lstDrawingLine, _hdc, 200, 200, 200);
+
 }
 
 int CPlayer::Update()
@@ -274,8 +361,8 @@ int CPlayer::Update()
 	// Holding Space
 	if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE).IsPress)
 	{
-		if (KEYSTATE::KEYSTATE_NOTPTRESSED == CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE).PrevState)
-		{
+		if (CanAdvance() && KEYSTATE::KEYSTATE_NOTPTRESSED == CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_SPACE).PrevState)
+		{			
 			m_bDrawingLine = true;
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_START, true);
 
@@ -287,7 +374,6 @@ int CPlayer::Update()
 		// If Holding Space and Enter Drawing Mode then player Can't move InArea OnlyNew Position can move
 		if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_LEFT).IsPress)
 		{
-			
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END,
 				0 != m_vecPrevMoveDirection.y);
 			if (false == IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X() - 1, (int)m_pTransform->GetPosition_Y())
@@ -298,7 +384,7 @@ int CPlayer::Update()
 			}
 		}
 		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_RIGHT).IsPress)
-		{ 
+		{
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END,
 				0 != m_vecPrevMoveDirection.y);
 			if (false == IsInRange(LINE::LINE_WIDTH, (int)m_pTransform->GetPosition_X() + 1, (int)m_pTransform->GetPosition_Y())
@@ -309,7 +395,7 @@ int CPlayer::Update()
 			} 
 		}
 		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_UP).IsPress)
-		{  
+		{
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END, 
 				0 != m_vecPrevMoveDirection.x);
 			if (false == IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() - 1)
@@ -320,7 +406,7 @@ int CPlayer::Update()
 			}
 		}
 		else if (CKeyMgr::GetInstance()->GetKeyState(KEY::KEY_DOWN).IsPress)
-		{ 
+		{
 			SaveLine((int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y(), POINT_END, 
 				0 != m_vecPrevMoveDirection.x);
 			if (false == IsInRange(LINE::LINE_HEIGHT, (int)m_pTransform->GetPosition_X(), (int)m_pTransform->GetPosition_Y() + 1)

@@ -12,11 +12,12 @@ enum class LINE
 class CPlayer : public CObject
 {
 private:
+	bool MeetOnEndLine(const Line _line, const Vector2 _lastpos, const Vector2 _startpos);
+	int DrawLine(std::list<Line>& _linelst, const HDC _hdc, const BYTE _r, const BYTE _g, const BYTE _b);
+	bool CanAdvance();
 	bool IsGetOutImgaeRange(const int _posx, const int _posy);
 	bool IsInRange(LINE _etype, const int _posx, const int _posy);
 	int SaveLine(const int _x, const int _y, const int _type, bool _directionchange);
-	int DrawLineRange(HDC _hdc);
-	int DrawDrawingLine(HDC _hdc);
 	int SaveDrawLineToList();
 	int RemakeLine();
 	bool PointIsInLine(const Vector2 _point,const Line _line);
@@ -34,13 +35,13 @@ public:
 
 	int SettingMoveNavi(const int _left,const int _top,const int _right,const int _bottom);
 private:
+
+	
+
 	bool				m_bDrawingLine;
 	Line				m_stTempLine;
 	std::list<Line>		m_lstDrawingLine;
 	std::list<Line>		m_lstLine;
-	
-	std::list<POINT>	m_lstPoint;
-
 
 	Vector2				m_vecPrevMoveDirection;
 	Vector2				m_vecMaxRangeLT;

@@ -9,6 +9,10 @@ public:
 	void LateUpdate();
 	void Process();
 	HDC GetMainDC() { return m_hDC; }
+
+public:// OnlyTest MustRemove Funtion
+	HDC Get_DBufferDC() { return m_memDC; }
+
 private:
 	HWND m_hWnd;
 	POINT m_ptResolution;
