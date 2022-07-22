@@ -5,6 +5,8 @@
 #include "CImage.h"
 #include "CPlayer.h"
 #include "CBitmapMgr.h"
+#include "CField.h"
+
 
 #define INGAME_WIDTH 600
 #define INGAME_HEIGHT 834
@@ -70,6 +72,8 @@ int CScene_stage1::Init()
 	// 우선 세팅은 이미지의 좌상단으로 고정을 한다
 	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_PLAYER, CPlayer::Create((int)(WINX * 0.5 - 300), (int)(WINY * 0.5 - 417), 0, 14, 14, L"Player.bmp"));
 	CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_IMAGE, CImage::Create((int)(WINX * 0.5f), (int)(WINY * 0.5f), 0, INGAME_WIDTH, INGAME_HEIGHT, bmpName));
+	//CObjectMgr::GetInstance()->AddObject(OBJECT::OBJECT_SCREEN, CField::Create());
+
 
 	std::list<CObject*> lst = CObjectMgr::GetInstance()->GetObjectList(OBJECT::OBJECT_PLAYER);
 	CObject* tmp = lst.front();

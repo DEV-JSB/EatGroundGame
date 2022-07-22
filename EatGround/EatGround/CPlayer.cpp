@@ -228,7 +228,7 @@ int CPlayer::RemakeLine()
 		else
 			++iter;
 	}
-	Line temp;
+	/*Line temp;*/
 	
 
 	//// Temp2 ³¡Á¡ Å½»ö!!

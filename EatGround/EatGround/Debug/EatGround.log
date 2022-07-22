@@ -1,3 +1,23 @@
-﻿  CPlayer.cpp
-C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\EatGround\CPlayer.cpp(231,7): warning C4101: 'temp': unreferenced local variable
-  EatGround.vcxproj -> C:\Users\Admin\Documents\GitHub\EatGroundGame\EatGround\Debug\EatGround.exe
+﻿  CBitmap.cpp
+  CBitmapMgr.cpp
+  CComponent.cpp
+  CEnemy.cpp
+  CField.cpp
+  CGameMgr.cpp
+  CKeyMgr.cpp
+  CImage.cpp
+  CMagentaBitmap.cpp
+  CObject.cpp
+  CObjectMgr.cpp
+  CObserver.cpp
+  CPlayer.cpp
+C:\Users\Admin\Desktop\EatGroundGame\EatGround\EatGround\CPlayer.cpp(231,7): warning C4101: 'temp': unreferenced local variable
+  CScene.cpp
+  CSceneMgr.cpp
+  CScene_end.cpp
+  CScene_stage1.cpp
+  CScene_start.cpp
+  CSubject.cpp
+  CTimeMgr.cpp
+  CTransform2D.cpp
+  EatGround.vcxproj -> C:\Users\Admin\Desktop\EatGroundGame\EatGround\Debug\EatGround.exe
